@@ -5,51 +5,203 @@ import contact from "../data/contact.json";
 ---
 
 <BaseLayout title={contact.seo.title} description={contact.seo.description}>
-  <PageHero eyebrow={contact.hero.eyebrow} title={contact.hero.title} intro={contact.hero.introduction}/>
-  <section class="section"><div class="container contact-grid">
-    <div>
-      <p class="eyebrow">{contact.introduction.eyebrow}</p>
-      <h2>{contact.introduction.heading}</h2>
-      <p>{contact.introduction.body}</p>
-      <dl>{contact.details.map(detail => <div><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>
-      <aside><strong>{contact.urgentNotice.heading}</strong> {contact.urgentNotice.body}</aside>
-    </div>
-    <form name="discovery-call" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="discovery-call"/>
-      <p class="sr-only"><label>Don’t fill this out: <input name="bot-field"/></label></p>
-      <div class="field-row">
-        <label>{contact.form.firstNameLabel}<input name="first-name" autocomplete="given-name" required/></label>
-        <label>{contact.form.lastNameLabel}<input name="last-name" autocomplete="family-name"/></label>
+  <PageHero
+    eyebrow={contact.hero.eyebrow}
+    title={contact.hero.title}
+    intro={contact.hero.introduction}
+  />
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">{contact.introduction.eyebrow}</p>
+        <h2>{contact.introduction.heading}</h2>
+        <p>{contact.introduction.body}</p>
+        <dl>
+          {
+            contact.details.map((detail) => (
+              <div>
+                <>
+                  <dt>{detail.label}</dt>
+                  <dd>{detail.value}</dd>
+                </>
+              </div>
+            ))
+          }
+        </dl>
+        <aside>
+          <strong>{contact.urgentNotice.heading}</strong>
+          {contact.urgentNotice.body}
+        </aside>
       </div>
-      <label>{contact.form.emailLabel}<input type="email" name="email" autocomplete="email" required/></label>
-      <label>{contact.form.phoneLabel} <span>{contact.form.optionalLabel}</span><input type="tel" name="phone" autocomplete="tel"/></label>
-      <fieldset>
-        <legend>{contact.form.meetingLegend}</legend>
-        {contact.form.meetingOptions.map(option => <label class="radio"><input type="radio" name="meeting" value={option.value}/> {option.label}</label>)}
-      </fieldset>
-      <label>{contact.form.messageLabel}<span>{contact.form.messageGuidance}</span><textarea name="message" rows="6" required></textarea></label>
-      <label class="consent"><input type="checkbox" required name="consent"/> {contact.form.consentLabel}</label>
-      <button class="button" type="submit">{contact.form.buttonLabel} <span aria-hidden="true">→</span></button>
-      <p class="form-note">{contact.form.privacyPrefix} <a href="/privacy">{contact.form.privacyLinkLabel}</a>.</p>
-    </form>
-  </div></section>
+      <form
+        name="discovery-call"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="discovery-call" />
+        <p class="sr-only">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
+        <div class="field-row">
+          <label
+            >{contact.form.firstNameLabel}<input
+              name="first-name"
+              autocomplete="given-name"
+              required
+            /></label
+          >
+          <label
+            >{contact.form.lastNameLabel}<input
+              name="last-name"
+              autocomplete="family-name"
+            /></label
+          >
+        </div>
+        <label
+          >{contact.form.emailLabel}<input
+            type="email"
+            name="email"
+            autocomplete="email"
+            required
+          /></label
+        >
+        <label
+          >{contact.form.phoneLabel}
+          <span>{contact.form.optionalLabel}</span><input
+            type="tel"
+            name="phone"
+            autocomplete="tel"
+          /></label
+        >
+        <fieldset>
+          <legend>{contact.form.meetingLegend}</legend>
+          {
+            contact.form.meetingOptions.map((option) => (
+              <label class="radio">
+                <input type="radio" name="meeting" value={option.value} />{" "}
+                {option.label}
+              </label>
+            ))
+          }
+        </fieldset>
+        <label
+          >{contact.form.messageLabel}<span>{contact.form.messageGuidance}</span
+          ><textarea name="message" rows="6" required></textarea></label
+        >
+        <label class="consent"
+          ><input type="checkbox" required name="consent" />
+          {contact.form.consentLabel}</label
+        >
+        <button class="button" type="submit"
+          >{contact.form.buttonLabel} <span aria-hidden="true">→</span></button
+        >
+        <p class="form-note">
+          {contact.form.privacyPrefix}
+          <a href="/privacy">{contact.form.privacyLinkLabel}</a>.
+        </p>
+      </form>
+    </div>
+  </section>
 </BaseLayout>
 <style>
-  .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(3rem,8vw,8rem);align-items:start}
-  .contact-grid dl div{padding:1rem 0;border-top:1px solid var(--line)}
-  dt{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--clay-dark)}
-  dd{margin:.25rem 0 0;font-family:var(--serif);font-size:1.2rem}
-  aside{margin-top:2rem;padding:1.2rem;background:var(--mist);font-size:.78rem}
-  form{padding:clamp(1.5rem,4vw,3rem);background:var(--cream);box-shadow:var(--shadow)}
-  label,legend{display:block;margin-bottom:1.25rem;font-size:.78rem;font-weight:600}
-  label span{float:right;color:#718078;font-weight:400}
-  input,textarea{width:100%;margin-top:.45rem;padding:.85rem .15rem;border:0;border-bottom:1px solid #89968e;border-radius:0;background:transparent;color:var(--ink);font:1rem var(--sans)}
-  input:focus,textarea:focus{outline:2px solid var(--clay);outline-offset:3px}
-  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-  fieldset{margin:0 0 1.5rem;padding:0;border:0}
-  .radio{display:inline-flex;align-items:center;gap:.4rem;margin-right:1rem;font-weight:400}
-  .radio input,.consent input{width:auto;margin:0}
-  .consent{display:flex;gap:.7rem}
-  .form-note{margin-top:1rem;font-size:.72rem}
-  @media(max-width:800px){.contact-grid{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}}
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(3rem, 8vw, 8rem);
+    align-items: start;
+  }
+  .contact-grid dl div {
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+  }
+  dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--clay-dark);
+  }
+  dd {
+    margin: 0.25rem 0 0;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+  }
+  aside {
+    margin-top: 2rem;
+    padding: 1.2rem;
+    background: var(--mist);
+    font-size: 0.78rem;
+  }
+  form {
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--cream);
+    box-shadow: var(--shadow);
+  }
+  label,
+  legend {
+    display: block;
+    margin-bottom: 1.25rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  label span {
+    color: #718078;
+    font-weight: 400;
+    display: block;
+  }
+  input,
+  textarea {
+    width: 100%;
+    margin-top: 0.45rem;
+    padding: 0.85rem 0.15rem;
+    border: 0;
+    border-bottom: 1px solid #89968e;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: 1rem var(--sans);
+  }
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  fieldset {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: 0;
+  }
+  .radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-right: 1rem;
+    font-weight: 400;
+  }
+  .radio input,
+  .consent input {
+    width: auto;
+    margin: 0;
+  }
+  .consent {
+    display: flex;
+    gap: 0.7rem;
+  }
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+  }
+  @media (max-width: 800px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

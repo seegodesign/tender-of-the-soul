@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 interface Props { title?: string; description?: string; image?: string; }
 const { title = 'Tender of the Soul | Hakomi on Kauaʻi', description = 'Trauma-informed Hakomi and mindful, body-centered support for adults, online and in person on Kauaʻi.', image = '/images/uploads/kauai-hero.avif' } = Astro.props;
@@ -14,6 +15,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <title>{title}</title><meta name="description" content={description}><link rel="canonical" href={canonical}>
     <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:image" content={new URL(image, Astro.url)}><meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <ClientRouter />
   </head>
   <body><a class="skip" href="#main">Skip to content</a><Header/><main id="main"><slot/></main><Footer/></body>
 </html>
