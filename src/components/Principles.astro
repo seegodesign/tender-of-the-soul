@@ -1,0 +1,16 @@
+---
+const items = [
+  ['01','Mindfulness','Slowing down enough to notice what is happening, here and now.'],
+  ['02','The body','Listening for information held in sensation, breath, posture, and movement.'],
+  ['03','Curiosity','Meeting experience gently, without diagnosing, forcing, or rushing to fix it.'],
+  ['04','Transformation','Making space for old beliefs and patterns to become visible and begin to change.']
+];
+---
+<div class="principles">{items.map(([n,t,d]) => <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div>
+<style>
+  .principles{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  article{padding:2.2rem 1.5rem;border-right:1px solid var(--line)}article:last-child{border:0}
+  span{color:var(--clay-dark);font-size:.7rem;letter-spacing:.12em}h3{margin:1.8rem 0 .7rem}p{color:#60716b;font-size:.9rem}
+  @media(max-width:800px){.principles{grid-template-columns:1fr 1fr}article:nth-child(2){border-right:0}article:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  @media(max-width:480px){.principles{grid-template-columns:1fr}article{border-right:0!important;border-bottom:1px solid var(--line)}}
+</style>

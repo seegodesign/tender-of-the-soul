@@ -1,0 +1,90 @@
+backend:
+  name: github
+  repo: REPLACE_WITH_GITHUB_OWNER/REPLACE_WITH_REPOSITORY
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+site_url: https://REPLACE_WITH_PRODUCTION_DOMAIN
+display_url: https://REPLACE_WITH_PRODUCTION_DOMAIN
+logo_url: /favicon.svg
+
+collections:
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    folder: src/content/blog
+    create: true
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: "Used in the page URL." }
+      - { label: Publish date, name: publishDate, widget: datetime, time_format: false }
+      - { label: Updated date, name: updatedDate, widget: datetime, required: false, time_format: false }
+      - { label: Author, name: author, widget: string, default: Elana }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Featured image, name: featuredImage, widget: image, required: false }
+      - { label: Featured image alt text, name: featuredImageAlt, widget: string, required: false }
+      - { label: Category, name: category, widget: string }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: SEO title, name: seoTitle, widget: string, required: false }
+      - { label: Meta description, name: metaDescription, widget: text, required: false }
+      - { label: Social sharing image, name: socialImage, widget: image, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: true }
+      - { label: Body content, name: body, widget: markdown }
+  - name: testimonials
+    label: Testimonials
+    folder: src/content/testimonials
+    create: true
+    extension: md
+    fields:
+      - { label: Client first name or initials, name: clientName, widget: string }
+      - { label: Client descriptor, name: descriptor, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Display order, name: order, widget: number, value_type: int }
+      - { label: Placeholder, name: placeholder, widget: boolean, default: false }
+      - { label: Testimonial, name: body, widget: text }
+  - name: faqs
+    label: FAQs
+    folder: src/content/faqs
+    create: true
+    extension: md
+    fields:
+      - { label: Question, name: question, widget: string }
+      - { label: Category, name: category, widget: select, options: [Hakomi, Sessions, Practice, General] }
+      - { label: Display order, name: order, widget: number, value_type: int }
+      - { label: Answer, name: body, widget: markdown }
+  - name: settings
+    label: Site settings
+    files:
+      - label: Global settings
+        name: global
+        file: src/data/site.json
+        fields:
+          - { label: Practice name, name: practiceName, widget: string }
+          - { label: Practitioner name, name: practitionerName, widget: string }
+          - { label: Email address, name: email, widget: string }
+          - { label: Phone number, name: phone, widget: string, required: false }
+          - { label: Location, name: location, widget: string }
+          - { label: Social links, name: socialLinks, widget: list, required: false }
+          - { label: Discovery call CTA label, name: discoveryCallLabel, widget: string }
+          - { label: Contact form heading, name: contactFormHeading, widget: string }
+          - { label: Contact form introduction, name: contactFormIntroduction, widget: text }
+          - { label: Default SEO title, name: defaultSeoTitle, widget: string }
+          - { label: Default meta description, name: defaultMetaDescription, widget: text }
+          - { label: Default social image, name: defaultSocialImage, widget: image }
+          - { label: Footer disclaimer, name: footerDisclaimer, widget: text }
+          - { label: Crisis-support disclaimer, name: crisisDisclaimer, widget: text }
+      - label: Homepage
+        name: homepage
+        file: src/data/home.json
+        fields:
+          - { label: Hero eyebrow, name: eyebrow, widget: string }
+          - { label: Hero headline, name: headline, widget: string }
+          - { label: Hero introduction, name: introduction, widget: text }
+          - { label: Primary CTA, name: primaryCta, widget: string }
+          - { label: Secondary CTA, name: secondaryCta, widget: string }
+          - { label: Location line, name: locationLine, widget: string }
+          - { label: Core statement, name: coreStatement, widget: text }
+          - { label: Practitioner statement, name: practitionerStatement, widget: text }

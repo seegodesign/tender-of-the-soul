@@ -1,0 +1,9 @@
+---
+import { getCollection, render } from 'astro:content'; import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro';
+const faqs=(await getCollection('faqs')).sort((a,b)=>a.data.order-b.data.order);
+const renderedFaqs = await Promise.all(faqs.map(async (faq) => ({ faq, Content: (await render(faq)).Content })));
+---
+<BaseLayout title="Frequently Asked Questions | Tender of the Soul"><PageHero eyebrow="Questions, welcomed" title="A little more clarity before you begin." intro="You are welcome to bring questions to a discovery call, too. There is no expectation that you arrive knowing whether this work is right for you."/>
+<section class="section"><div class="narrow faq-list">{renderedFaqs.map(({faq, Content},i)=><details open={i===0}><summary><span>{String(i+1).padStart(2,'0')}</span>{faq.data.question}<i aria-hidden="true">+</i></summary><div class="answer"><Content/></div></details>)}</div></section>
+</BaseLayout>
+<style>.faq-list{border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line)}summary{display:grid;grid-template-columns:45px 1fr auto;gap:1rem;align-items:center;padding:1.5rem 0;cursor:pointer;list-style:none;font:1.5rem var(--serif)}summary::-webkit-details-marker{display:none}summary span{font:.68rem var(--sans);color:var(--clay-dark)}summary i{font:300 1.4rem var(--sans);transition:.2s}details[open] summary i{transform:rotate(45deg)}.answer{padding:0 3rem 1.5rem 61px;color:#526660}</style>
