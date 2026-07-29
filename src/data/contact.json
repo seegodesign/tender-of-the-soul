@@ -1,0 +1,45 @@
+{
+  "seo": {
+    "title": "Contact | Tender of the Soul",
+    "description": "Contact Tender of the Soul to schedule a discovery call for online or in-person Hakomi sessions on Kauaʻi."
+  },
+  "hero": {
+    "eyebrow": "Begin a conversation",
+    "title": "You can start without having all the words.",
+    "introduction": "Reach out to schedule a complimentary discovery call. We can talk about what brings you here and whether working together feels like a good fit."
+  },
+  "introduction": {
+    "eyebrow": "Discovery call",
+    "heading": "A simple first step.",
+    "body": "The form is not a commitment to begin sessions. Elana will respond with options for a brief conversation where you can ask questions and get a sense of the work."
+  },
+  "details": [
+    { "label": "Location", "value": "Kauaʻi, Hawaiʻi · online and in person" },
+    { "label": "Session length", "value": "60–90 minutes" },
+    { "label": "Response time", "value": "Typically within 2–3 business days" },
+    { "label": "Email", "value": "[Add practice email in CMS]" }
+  ],
+  "urgentNotice": {
+    "heading": "Please do not use this form for urgent support.",
+    "body": "Tender of the Soul does not provide crisis services. If you are in immediate danger, contact local emergency services or an appropriate crisis resource in your area."
+  },
+  "form": {
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "emailLabel": "Email address",
+    "phoneLabel": "Phone number",
+    "optionalLabel": "Optional",
+    "meetingLegend": "How would you prefer to meet?",
+    "meetingOptions": [
+      { "label": "Online", "value": "online" },
+      { "label": "In person on Kauaʻi", "value": "in-person" },
+      { "label": "I’m not sure yet", "value": "unsure" }
+    ],
+    "messageLabel": "What would you like Elana to know?",
+    "messageGuidance": "Please avoid including highly sensitive medical information.",
+    "consentLabel": "I understand this form is not monitored for urgent or crisis support.",
+    "buttonLabel": "Send My Note",
+    "privacyPrefix": "Your information is used only to respond to your inquiry. Please review the",
+    "privacyLinkLabel": "privacy policy"
+  }
+}

@@ -1,7 +1,8 @@
 backend:
   name: github
-  repo: REPLACE_WITH_GITHUB_OWNER/REPLACE_WITH_REPOSITORY
+  repo: seegodesign/tender-of-the-soul
   branch: main
+  base_url: https://tender-of-the-soul-sveltia-cms-auth.seegodesign.workers.dev
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
@@ -136,6 +137,122 @@ collections:
               - { label: Button label, name: buttonLabel, widget: string }
               - { label: Card heading, name: cardHeading, widget: string }
               - { label: Session details, name: items, widget: list, field: { label: Detail, name: detail, widget: string } }
+      - label: About
+        name: about
+        file: src/data/about.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+          - label: Practitioner portrait
+            name: portrait
+            widget: object
+            fields:
+              - { label: Portrait image, name: image, widget: image, required: false }
+              - { label: Image alt text, name: altText, widget: string }
+              - { label: Placeholder heading, name: placeholderHeading, widget: string }
+              - { label: Placeholder note, name: placeholderNote, widget: string }
+          - label: About Elana
+            name: introduction
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Practitioner statement, name: statement, widget: text }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+          - label: Orientation
+            name: orientation
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Lead statement, name: statement, widget: text }
+              - { label: Body, name: body, widget: text }
+          - label: Training and background
+            name: credentials
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+              - label: Practice details
+                name: items
+                widget: list
+                min: 1
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Description, name: description, widget: text }
+      - label: Contact
+        name: contact
+        file: src/data/contact.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+          - label: Discovery call introduction
+            name: introduction
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Body, name: body, widget: text }
+          - label: Practice details
+            name: details
+            widget: list
+            min: 1
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Value, name: value, widget: string }
+          - label: Urgent-support notice
+            name: urgentNotice
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Body, name: body, widget: text }
+          - label: Contact form
+            name: form
+            widget: object
+            fields:
+              - { label: First-name label, name: firstNameLabel, widget: string }
+              - { label: Last-name label, name: lastNameLabel, widget: string }
+              - { label: Email label, name: emailLabel, widget: string }
+              - { label: Phone label, name: phoneLabel, widget: string }
+              - { label: Optional-field label, name: optionalLabel, widget: string }
+              - { label: Meeting preference question, name: meetingLegend, widget: string }
+              - label: Meeting options
+                name: meetingOptions
+                widget: list
+                min: 1
+                fields:
+                  - { label: Visible label, name: label, widget: string }
+                  - { label: Form value, name: value, widget: string, hint: "Use lowercase letters and hyphens. This is included in form submissions." }
+              - { label: Message-field label, name: messageLabel, widget: string }
+              - { label: Message guidance, name: messageGuidance, widget: string }
+              - { label: Consent text, name: consentLabel, widget: text }
+              - { label: Submit-button label, name: buttonLabel, widget: string }
+              - { label: Privacy-note introduction, name: privacyPrefix, widget: text }
+              - { label: Privacy-policy link label, name: privacyLinkLabel, widget: string }
   - name: settings
     label: Site settings
     files:
