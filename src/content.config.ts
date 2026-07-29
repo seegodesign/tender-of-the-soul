@@ -19,4 +19,8 @@ const testimonials = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
   schema: z.object({ clientName: z.string(), descriptor: z.string().optional(), featured: z.boolean(), order: z.number(), placeholder: z.boolean().default(true) })
 });
-export const collections = { blog, faqs, testimonials };
+const legal = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/legal' }),
+  schema: z.object({ title: z.string(), seoTitle: z.string(), eyebrow: z.string(), introduction: z.string(), updatedLabel: z.string().optional(), order: z.number() })
+});
+export const collections = { blog, faqs, testimonials, legal };

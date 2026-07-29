@@ -6,8 +6,8 @@ backend:
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
-site_url: https://REPLACE_WITH_PRODUCTION_DOMAIN
-display_url: https://REPLACE_WITH_PRODUCTION_DOMAIN
+site_url: https://https://tenderofthesoul.com
+display_url: https://https://tenderofthesoul.com
 logo_url: /favicon.svg
 
 collections:
@@ -56,6 +56,19 @@ collections:
       - { label: Category, name: category, widget: select, options: [Hakomi, Sessions, Practice, General] }
       - { label: Display order, name: order, widget: number, value_type: int }
       - { label: Answer, name: body, widget: markdown }
+  - name: legal
+    label: Legal pages
+    folder: src/content/legal
+    create: false
+    extension: md
+    fields:
+      - { label: Page heading, name: title, widget: string }
+      - { label: SEO title, name: seoTitle, widget: string }
+      - { label: Kicker, name: eyebrow, widget: string }
+      - { label: Introduction, name: introduction, widget: text }
+      - { label: Updated label, name: updatedLabel, widget: string, required: false }
+      - { label: Display order, name: order, widget: hidden }
+      - { label: Page content, name: body, widget: markdown }
   - name: pages
     label: Pages
     files:
@@ -253,6 +266,176 @@ collections:
               - { label: Submit-button label, name: buttonLabel, widget: string }
               - { label: Privacy-note introduction, name: privacyPrefix, widget: text }
               - { label: Privacy-policy link label, name: privacyLinkLabel, widget: string }
+      - label: Hakomi
+        name: hakomi
+        file: src/data/hakomi.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+          - label: Overview
+            name: overview
+            widget: object
+            fields:
+              - { label: Lead, name: lead, widget: text }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+          - label: Foundations
+            name: foundations
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - label: Foundation cards
+                name: items
+                widget: list
+                fields:
+                  - { label: Number, name: number, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+          - label: Body signals
+            name: signals
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Signals, name: items, widget: list, field: { label: Signal, name: signal, widget: string } }
+          - label: Process
+            name: process
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - { label: Closing statement, name: statement, widget: text }
+          - label: Related approaches
+            name: related
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+          - label: Is Hakomi right for me?
+            name: fit
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Body, name: body, widget: text }
+              - { label: Button label, name: buttonLabel, widget: string }
+      - label: Sessions
+        name: sessions
+        file: src/data/sessions.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+          - label: Session details
+            name: details
+            widget: list
+            fields:
+              - { label: Number, name: number, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Body, name: body, widget: text }
+          - label: What to expect
+            name: expect
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - label: Session steps
+                name: steps
+                widget: list
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Body, name: body, widget: text }
+          - label: Choice and participation
+            name: choice
+            widget: object
+            fields:
+              - { label: Quote, name: quote, widget: text }
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+          - label: First session
+            name: firstSession
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Lead statement, name: statement, widget: text }
+              - { label: Body, name: body, widget: text }
+              - { label: Button label, name: buttonLabel, widget: string }
+      - label: Journal landing
+        name: journal
+        file: src/data/journal.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+          - { label: Read-article label, name: readLabel, widget: string }
+          - { label: Back-to-journal label, name: backLabel, widget: string }
+          - { label: Author prefix, name: authorPrefix, widget: string }
+      - label: Page not found
+        name: notFound
+        file: src/data/notFound.json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: Kicker, name: eyebrow, widget: string }
+          - { label: Heading, name: heading, widget: string }
+          - { label: Body, name: body, widget: text }
+          - { label: Home-button label, name: homeButton, widget: string }
+          - { label: Contact-button label, name: contactButton, widget: string }
+      - label: FAQs landing
+        name: faqsPage
+        file: src/data/faqsPage.json
+        fields:
+          - label: SEO
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: Page introduction
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
   - name: settings
     label: Site settings
     files:
@@ -274,3 +457,31 @@ collections:
           - { label: Default social image, name: defaultSocialImage, widget: image }
           - { label: Footer disclaimer, name: footerDisclaimer, widget: text }
           - { label: Crisis-support disclaimer, name: crisisDisclaimer, widget: text }
+          - label: Navigation
+            name: navigation
+            widget: object
+            fields:
+              - { label: About label, name: about, widget: string }
+              - { label: Hakomi label, name: hakomi, widget: string }
+              - { label: Sessions label, name: sessions, widget: string }
+              - { label: FAQs label, name: faqs, widget: string }
+              - { label: Journal label, name: journal, widget: string }
+              - { label: Contact label, name: contact, widget: string }
+              - { label: Mobile menu label, name: menuLabel, widget: string }
+              - { label: Navigation accessibility label, name: ariaLabel, widget: string }
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - { label: CTA kicker, name: ctaEyebrow, widget: string }
+              - { label: CTA heading, name: ctaHeading, widget: string }
+              - { label: CTA body, name: ctaBody, widget: text }
+              - { label: CTA button, name: ctaButton, widget: string }
+              - { label: Practice description, name: practiceDescription, widget: string }
+              - { label: Location line, name: locationLine, widget: string }
+              - { label: Important label, name: importantLabel, widget: string }
+              - { label: Privacy link label, name: privacyLabel, widget: string }
+              - { label: Disclaimer link label, name: disclaimerLabel, widget: string }
+              - { label: Credit prefix, name: creditPrefix, widget: string }
+              - { label: Credit label, name: creditLabel, widget: string }
+              - { label: Credit URL, name: creditUrl, widget: string }

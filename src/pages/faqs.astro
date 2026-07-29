@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import page from "../data/faqsPage.json";
 const faqs = (await getCollection("faqs")).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -10,11 +11,11 @@ const renderedFaqs = await Promise.all(
 );
 ---
 
-<BaseLayout title="Frequently Asked Questions | Tender of the Soul"
+<BaseLayout title={page.seo.title} description={page.seo.description}
   ><PageHero
-    eyebrow="Questions, welcomed"
-    title="A little more clarity before you begin."
-    intro="You are welcome to bring questions to a discovery call, too. There is no expectation that you arrive knowing whether this work is right for you."
+    eyebrow={page.hero.eyebrow}
+    title={page.hero.title}
+    intro={page.hero.introduction}
   />
   <section class="section">
     <div class="narrow faq-list">

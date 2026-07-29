@@ -2,8 +2,9 @@
 import { getCollection, render } from 'astro:content'; import BaseLayout from '../../layouts/BaseLayout.astro';
 export async function getStaticPaths(){const posts=await getCollection('blog',({data})=>!data.draft);return posts.map(post=>({params:{id:post.id},props:{post}}))}
 const { post } = Astro.props; const { Content } = await render(post);
+import journal from '../../data/journal.json';
 ---
 <BaseLayout title={post.data.seoTitle ?? `${post.data.title} | Tender of the Soul`} description={post.data.metaDescription ?? post.data.excerpt}>
-<article><header class="article-head"><div class="narrow"><p class="eyebrow">{post.data.category} · {post.data.publishDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p><h1>{post.data.title}</h1><p>{post.data.excerpt}</p></div></header><div class="narrow prose article-body"><Content/></div><footer class="article-foot narrow"><p>Written by {post.data.author}</p><a class="text-link" href="/blog">← Back to the journal</a></footer></article>
+<article><header class="article-head"><div class="narrow"><p class="eyebrow">{post.data.category} · {post.data.publishDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p><h1>{post.data.title}</h1><p>{post.data.excerpt}</p></div></header><div class="narrow prose article-body"><Content/></div><footer class="article-foot narrow"><p>{journal.authorPrefix} {post.data.author}</p><a class="text-link" href="/blog">← {journal.backLabel}</a></footer></article>
 </BaseLayout>
 <style>.article-head{padding:11rem 0 5rem;background:var(--cream)}.article-head h1{font-size:clamp(3.2rem,7vw,6.3rem)}.article-head p:not(.eyebrow){margin-top:1.5rem;font:1.4rem/1.5 var(--serif)}.article-body{padding-block:5rem}.article-body :global(p:first-child){font:1.45rem/1.55 var(--serif);color:var(--ink)}.article-foot{padding:2rem 0 5rem;border-top:1px solid var(--line)}</style>

@@ -10,7 +10,22 @@
   "contactFormIntroduction": "Reach out to schedule a complimentary discovery call.",
   "defaultSeoTitle": "Tender of the Soul | Hakomi on Kauaʻi",
   "defaultMetaDescription": "Trauma-informed Hakomi and mindful, body-centered support for adults, online and in person on Kauaʻi.",
-  "defaultSocialImage": "/images/kauai-hero.png",
+  "defaultSocialImage": "/images/uploads/kauai-hero.avif",
   "footerDisclaimer": "Tender of the Soul offers non-licensed, educational and supportive services.",
-  "crisisDisclaimer": "Tender of the Soul does not provide crisis services."
+  "crisisDisclaimer": "Tender of the Soul does not provide crisis services.",
+  "navigation": {"about":"About","hakomi":"Hakomi","sessions":"Sessions","faqs":"FAQs","journal":"Journal","contact":"Contact","menuLabel":"Open menu","ariaLabel":"Main navigation"},
+  "footer": {
+    "ctaEyebrow":"A gentle beginning",
+    "ctaHeading":"You don’t have to know exactly what you need.",
+    "ctaBody":"A discovery call is simply a place to begin: to ask questions, share what brings you here, and sense whether working together feels right.",
+    "ctaButton":"Begin a Conversation",
+    "practiceDescription":"Hakomi and mindful, body-centered work for adults.",
+    "locationLine":"Online and in person on Kauaʻi.",
+    "importantLabel":"Important:",
+    "privacyLabel":"Privacy",
+    "disclaimerLabel":"Site disclaimer",
+    "creditPrefix":"Site by",
+    "creditLabel":"Seego Design",
+    "creditUrl":"https://seegodesign.com"
+  }
 }

@@ -1,27 +1,29 @@
+---
+import site from '../data/site.json';
+---
 <footer>
   <section class="cta">
     <div class="container">
-      <p class="eyebrow">A gentle beginning</p>
-      <h2>You don’t have to know exactly what you need.</h2>
-      <p>A discovery call is simply a place to begin: to ask questions, share what brings you here, and sense whether working together feels right.</p>
-      <a class="button" href="/contact">Begin a Conversation <span aria-hidden="true">→</span></a>
+      <p class="eyebrow">{site.footer.ctaEyebrow}</p>
+      <h2>{site.footer.ctaHeading}</h2>
+      <p>{site.footer.ctaBody}</p>
+      <a class="button" href="/contact">{site.footer.ctaButton} <span aria-hidden="true">→</span></a>
     </div>
   </section>
   <div class="foot container">
     <div>
-      <a class="wordmark" href="/">Tender <i>of the</i> Soul</a>
-      <p>Hakomi and mindful, body-centered work for adults.<br>Online and in person on Kauaʻi.</p>
+      <a class="wordmark" href="/">{site.practiceName}</a>
+      <p>{site.footer.practiceDescription}<br>{site.footer.locationLine}</p>
     </div>
     <div class="links">
-      <a href="/about">About</a><a href="/hakomi">Hakomi</a><a href="/sessions">Sessions</a><a href="/faqs">FAQs</a><a href="/blog">Journal</a><a href="/contact">Contact</a>
+      <a href="/about">{site.navigation.about}</a><a href="/hakomi">{site.navigation.hakomi}</a><a href="/sessions">{site.navigation.sessions}</a><a href="/faqs">{site.navigation.faqs}</a><a href="/blog">{site.navigation.journal}</a><a href="/contact">{site.navigation.contact}</a>
     </div>
     <div class="legal">
-      <p><strong>Important:</strong> Tender of the Soul offers non-licensed, educational and supportive services. These services are not a substitute for medical care, psychiatric care, crisis support, or care from a licensed mental-health professional.</p>
-      <p class="placeholder">Publication note: scope-of-practice and disclaimer language must be reviewed by a qualified local professional.</p>
-      <p><a href="/privacy">Privacy</a> · <a href="/disclaimer">Site disclaimer</a></p>
+      <p><strong>{site.footer.importantLabel}</strong> {site.footerDisclaimer}</p>
+      <p><a href="/privacy">{site.footer.privacyLabel}</a> · <a href="/disclaimer">{site.footer.disclaimerLabel}</a></p>
     </div>
   </div>
-  <div class="copyright container">© {new Date().getFullYear()} Tender of the Soul <span>Made with care on Kauaʻi</span></div>
+  <div class="copyright container">© {new Date().getFullYear()} {site.practiceName} <span>{site.footer.creditPrefix} <a href={site.footer.creditUrl} target="_blank" rel="noopener">{site.footer.creditLabel}</a></span></div>
 </footer>
 <style>
   .cta { padding: clamp(5rem,10vw,9rem) 0; background: var(--mist); color: var(--ink); text-align: center; }
