@@ -55,6 +55,87 @@ collections:
       - { label: Category, name: category, widget: select, options: [Hakomi, Sessions, Practice, General] }
       - { label: Display order, name: order, widget: number, value_type: int }
       - { label: Answer, name: body, widget: markdown }
+  - name: pages
+    label: Pages
+    files:
+      - label: Home
+        name: home
+        file: src/data/home.json
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Headline, name: headline, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+              - { label: Primary button label, name: primaryCta, widget: string }
+              - { label: Secondary button label, name: secondaryCta, widget: string }
+              - { label: Location line, name: locationLine, widget: string }
+              - { label: Hero image alt text, name: imageAlt, widget: string }
+          - label: Welcome
+            name: welcome
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Core statement, name: statement, widget: text }
+              - { label: Body, name: body, widget: text }
+              - { label: Link label, name: linkLabel, widget: string }
+          - label: Beyond understanding
+            name: insight
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Lead, name: lead, widget: text }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - { label: Link label, name: linkLabel, widget: string }
+              - { label: Diagram first label, name: diagramLabelOne, widget: string }
+              - { label: Diagram second label, name: diagramLabelTwo, widget: string }
+          - label: Approach
+            name: approach
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+              - label: Principles
+                name: principles
+                widget: list
+                min: 1
+                fields:
+                  - { label: Number, name: number, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+          - label: Permission structure
+            name: permission
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: First paragraph, name: paragraphOne, widget: text }
+              - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - { label: Quote, name: quote, widget: text }
+              - { label: Attribution, name: attribution, widget: string }
+          - label: Possibilities
+            name: possibility
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Possibility statements, name: items, widget: list, field: { label: Statement, name: statement, widget: string } }
+          - label: Sessions preview
+            name: sessions
+            widget: object
+            fields:
+              - { label: Kicker, name: eyebrow, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Introduction, name: introduction, widget: text }
+              - { label: Button label, name: buttonLabel, widget: string }
+              - { label: Card heading, name: cardHeading, widget: string }
+              - { label: Session details, name: items, widget: list, field: { label: Detail, name: detail, widget: string } }
   - name: settings
     label: Site settings
     files:
@@ -76,15 +157,3 @@ collections:
           - { label: Default social image, name: defaultSocialImage, widget: image }
           - { label: Footer disclaimer, name: footerDisclaimer, widget: text }
           - { label: Crisis-support disclaimer, name: crisisDisclaimer, widget: text }
-      - label: Homepage
-        name: homepage
-        file: src/data/home.json
-        fields:
-          - { label: Hero eyebrow, name: eyebrow, widget: string }
-          - { label: Hero headline, name: headline, widget: string }
-          - { label: Hero introduction, name: introduction, widget: text }
-          - { label: Primary CTA, name: primaryCta, widget: string }
-          - { label: Secondary CTA, name: secondaryCta, widget: string }
-          - { label: Location line, name: locationLine, widget: string }
-          - { label: Core statement, name: coreStatement, widget: text }
-          - { label: Practitioner statement, name: practitionerStatement, widget: text }

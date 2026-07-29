@@ -1,10 +1,12 @@
 ---
-const items = [
+interface Props { items?: { number: string; title: string; description: string }[] }
+const defaults = [
   ['01','Mindfulness','Slowing down enough to notice what is happening, here and now.'],
   ['02','The body','Listening for information held in sensation, breath, posture, and movement.'],
   ['03','Curiosity','Meeting experience gently, without diagnosing, forcing, or rushing to fix it.'],
   ['04','Transformation','Making space for old beliefs and patterns to become visible and begin to change.']
 ];
+const items = Astro.props.items?.map(({ number, title, description }) => [number, title, description]) ?? defaults;
 ---
 <div class="principles">{items.map(([n,t,d]) => <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div>
 <style>

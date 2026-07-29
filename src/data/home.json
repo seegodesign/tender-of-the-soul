@@ -1,10 +1,72 @@
 {
-  "eyebrow": "Hakomi and body-centered work for adults",
-  "headline": "The future you’re longing for begins within.",
-  "introduction": "When painful experiences quietly organize life beneath the surface, moving forward can feel difficult even when you understand the pattern. There is another way to listen.",
-  "primaryCta": "Schedule a Discovery Call",
-  "secondaryCta": "Discover Hakomi",
-  "locationLine": "Online and in person on Kauaʻi",
-  "coreStatement": "Through Hakomi and mindful, body-centered therapy, I create a safe permission structure where difficult emotions can finally be felt, met, and transformed.",
-  "practitionerStatement": "I hold a permission structure that helps people feel what has been too scary to feel. I meet them there and accompany them where they need to go."
+  "hero": {
+    "eyebrow": "Hakomi and body-centered work for adults",
+    "headline": "The future you’re longing for begins within.",
+    "introduction": "When painful experiences quietly organize life beneath the surface, moving forward can feel difficult even when you understand the pattern. There is another way to listen.",
+    "primaryCta": "Schedule a Discovery Call",
+    "secondaryCta": "Discover Hakomi",
+    "locationLine": "Online and in person on Kauaʻi",
+    "imageAlt": "Soft evening light over lush tropical foliage and the ocean on Kauaʻi"
+  },
+  "welcome": {
+    "eyebrow": "Welcome, just as you are",
+    "heading": "What if you didn’t have to push past what hurts?",
+    "statement": "Through Hakomi and mindful, body-centered therapy, I create a safe permission structure where difficult emotions can finally be felt, met, and transformed.",
+    "body": "Here, nothing needs to be performed or perfected. We slow down and listen to the quiet intelligence of your present-moment experience, making room for what has felt too much to hold alone.",
+    "linkLabel": "Meet Elana"
+  },
+  "insight": {
+    "eyebrow": "Beyond understanding",
+    "heading": "When insight alone hasn’t changed the pattern.",
+    "lead": "You may understand your patterns and still feel caught inside them.",
+    "paragraphOne": "You may have talked about your history, named the pattern, and worked hard to change it. Yet something inside may continue to respond as though the past is still present.",
+    "paragraphTwo": "Somatic work invites the body into the conversation. By gently noticing sensation, breath, posture, emotion, and subtle shifts, the beliefs organizing your experience may begin to reveal themselves.",
+    "linkLabel": "How Hakomi works",
+    "diagramLabelOne": "What the mind knows",
+    "diagramLabelTwo": "What the body carries"
+  },
+  "approach": {
+    "eyebrow": "A different way of listening",
+    "heading": "Your body has been speaking all along.",
+    "introduction": "Hakomi is a mindful, body-centered approach. It helps us slow down enough to notice what words alone may not reach, following your own unfolding process with curiosity and compassion.",
+    "principles": [
+      { "number": "01", "title": "Mindfulness", "description": "Slowing down enough to notice what is happening, here and now." },
+      { "number": "02", "title": "The body", "description": "Listening for information held in sensation, breath, posture, and movement." },
+      { "number": "03", "title": "Curiosity", "description": "Meeting experience gently, without diagnosing, forcing, or rushing to fix it." },
+      { "number": "04", "title": "Transformation", "description": "Making space for old beliefs and patterns to become visible and begin to change." }
+    ]
+  },
+  "permission": {
+    "eyebrow": "At your own pace",
+    "heading": "A permission structure is something we create together.",
+    "paragraphOne": "It is a therapeutic space in which nothing is forced or rushed. Together, we create enough steadiness for experiences that have felt overwhelming, frightening, or inaccessible to emerge gently.",
+    "paragraphTwo": "You remain an active participant. You can slow down, pause, or change direction at any moment.",
+    "quote": "I hold a permission structure that helps people feel what has been too scary to feel. I meet them there and accompany them where they need to go.",
+    "attribution": "— Elana, Hakomi practitioner"
+  },
+  "possibility": {
+    "eyebrow": "What may become possible",
+    "heading": "When your inner architecture shifts, new possibilities become available.",
+    "items": [
+      "Old patterns may begin to loosen.",
+      "Choice can appear where reaction once lived.",
+      "Your relationship with yourself may soften.",
+      "The future may feel wider than it did before."
+    ]
+  },
+  "sessions": {
+    "eyebrow": "The shape of a session",
+    "heading": "Present. Collaborative. Gently paced.",
+    "introduction": "Sessions last 60–90 minutes and take place online or in a private home office on Kauaʻi. No previous experience with mindfulness or somatic work is needed.",
+    "buttonLabel": "What to Expect",
+    "cardHeading": "In a session, we may notice",
+    "items": [
+      "Physical sensations and breath",
+      "Emotions, images, and memories",
+      "Posture, gestures, or impulses",
+      "Protective responses",
+      "Words or beliefs that arise",
+      "Places of tension, openness, or movement"
+    ]
+  }
 }
