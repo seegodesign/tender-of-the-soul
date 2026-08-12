@@ -1,10 +1,72 @@
 {
-  "seo": {"title":"What Is Hakomi? | Tender of the Soul","description":"Learn about Hakomi, a mindful, body-centered approach to present-moment experience."},
-  "hero": {"eyebrow":"Understanding Hakomi","title":"Listen beneath the words.","introduction":"Hakomi is a gentle, mindful, body-centered approach that follows present-moment experience with curiosity and compassion."},
-  "overview": {"lead":"The body can reveal information that is not yet available to the conscious mind.","paragraphOne":"Rather than relying entirely on analysis or conversation, Hakomi invites us to notice the small, often overlooked ways experience is happening now: a held breath, a change in posture, an emotion at the edge of awareness, an impulse to move closer or pull away.","paragraphTwo":"These are not problems to correct. They are doorways into the beliefs and organizing patterns that may be shaping how you relate, protect yourself, and imagine what is possible."},
-  "foundations": {"eyebrow":"Four foundations","heading":"A slower, kinder kind of attention.","items":[{"number":"01","title":"Mindfulness","description":"Slowing down enough to notice what is happening, here and now."},{"number":"02","title":"The body","description":"Listening for information held in sensation, breath, posture, and movement."},{"number":"03","title":"Curiosity","description":"Meeting experience gently, without diagnosing, forcing, or rushing to fix it."},{"number":"04","title":"Transformation","description":"Making space for old beliefs and patterns to become visible and begin to change."}]},
-  "signals": {"eyebrow":"What the body may communicate","heading":"More than sensation.","items":["Breath and tension","Posture and gesture","Facial expression","Movement and impulse","Emotion and memory","Repeated reactions","Subtle shifts in experience"]},
-  "process": {"eyebrow":"The process","heading":"From unconscious pattern to possibility.","paragraphOne":"Core beliefs can quietly organize our experience. They influence what we expect, what we notice, and which futures feel available to us.","paragraphTwo":"Through mindful contact with present-moment experience, these patterns may become visible. When they are safely felt and met, their charge can begin to soften, creating space for different choices, relationships, and ways of being.","statement":"When your inner architecture shifts, new possibilities become available."},
-  "related": {"heading":"Related ways of working","paragraphOne":"Elana’s work is trauma informed and may draw from or share principles with mindfulness, somatic approaches, attachment-oriented work, Internal Family Systems-informed perspectives, and Somatic Experiencing-informed principles.","paragraphTwo":"This language describes influences and shared principles only; it does not claim formal certification in these modalities. Verified training details will be added to the About page before publication."},
-  "fit": {"heading":"Is Hakomi right for me?","body":"You do not need to be comfortable with your body, good at mindfulness, or able to name exactly what you feel. Curiosity is enough. If you want a process that includes more than talking and respects your pace, Hakomi may offer a meaningful place to begin.","buttonLabel":"Schedule a Discovery Call"}
+  "seo": {
+    "title": "What Is Hakomi? | Tender of the Soul",
+    "description": "Learn about Hakomi, a mindful, body-centered approach to present-moment experience."
+  },
+  "hero": {
+    "eyebrow": "Understanding Hakomi",
+    "title": "Listen beneath the words.",
+    "introduction": "Hakomi is a gentle, mindful, body-centered approach that follows present-moment experience with curiosity and compassion."
+  },
+  "overview": {
+    "lead": "The body can reveal information that is not yet available to the conscious mind.",
+    "paragraphOne": "Rather than relying entirely on analysis or conversation, Hakomi invites us to notice the small, often overlooked ways experience is happening now: a held breath, a change in posture, an emotion at the edge of awareness, an impulse to move closer or pull away.",
+    "paragraphTwo": "These are not problems to correct. They are doorways into the beliefs and organizing patterns that may be shaping how you relate, protect yourself, and imagine what is possible."
+  },
+  "foundations": {
+    "eyebrow": "Four foundations",
+    "heading": "A slower, kinder kind of attention.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Mindfulness",
+        "description": "Slowing down enough to notice what is happening, here and now."
+      },
+      {
+        "number": "02",
+        "title": "The body",
+        "description": "Listening for information held in sensation, breath, posture, and movement."
+      },
+      {
+        "number": "03",
+        "title": "Curiosity",
+        "description": "Meeting experience gently, without diagnosing, forcing, or rushing to fix it."
+      },
+      {
+        "number": "04",
+        "title": "Transformation",
+        "description": "Making space for old beliefs and patterns to become visible and begin to change."
+      }
+    ]
+  },
+  "signals": {
+    "eyebrow": "What the body may communicate",
+    "heading": "More than sensation.",
+    "items": [
+      "Breath and tension",
+      "Posture and gesture",
+      "Facial expression",
+      "Movement and impulse",
+      "Emotion and memory",
+      "Repeated reactions",
+      "Subtle shifts in experience"
+    ]
+  },
+  "process": {
+    "eyebrow": "The process",
+    "heading": "From unconscious pattern to possibility.",
+    "paragraphOne": "Core beliefs can quietly organize our experience. They influence what we expect, what we notice, and which futures feel available to us.",
+    "paragraphTwo": "Through mindful contact with present-moment experience, these patterns may become visible. When they are safely felt and met, their charge can begin to soften, creating space for different choices, relationships, and ways of being.",
+    "statement": "When your inner architecture shifts, new possibilities become available."
+  },
+  "related": {
+    "heading": "Related ways of working",
+    "paragraphOne": "Elana’s work is trauma informed and may draw from or share principles with mindfulness, somatic approaches, attachment-oriented work, Internal Family Systems-informed perspectives, and Somatic Experiencing-informed principles, Jungian thought and dream analysis, and Non Violent Communication.",
+    "paragraphTwo": "This language describes influences and shared principles only; it does not claim formal certification in these modalities. Verified training details will be added to the About page before publication."
+  },
+  "fit": {
+    "heading": "Is Hakomi right for me?",
+    "body": "You do not need to be comfortable with your body, good at mindfulness, or able to name exactly what you feel. Curiosity is enough. If you want a process that includes more than talking and respects your pace, Hakomi may offer a meaningful place to begin.",
+    "buttonLabel": "Schedule a Discovery Call"
+  }
 }
