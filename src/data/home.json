@@ -20,7 +20,7 @@
     "heading": "When insight alone hasn’t changed the pattern.",
     "lead": "You may understand your patterns and still feel caught inside them.",
     "paragraphOne": "You may have talked about your history, named the pattern, and worked hard to change it. Yet something inside may continue to respond as though the past is still present.",
-    "paragraphTwo": "Somatic work invites the body into the conversation. By gently noticing sensation, breath, posture, emotion, and subtle shifts, the beliefs organizing your experience may begin to reveal themselves.",
+    "paragraphTwo": "Somatic work invites the body into the conversation. By gently noticing sensation, breath, posture, guesture, images and emotional textures, the beliefs organizing your experience may begin to reveal themselves.",
     "linkLabel": "How Hakomi works",
     "diagramLabelOne": "What the mind knows",
     "diagramLabelTwo": "What the body carries"
@@ -30,18 +30,34 @@
     "heading": "Your body has been speaking all along.",
     "introduction": "Hakomi is a mindful, body-centered approach. It helps us slow down enough to notice what words alone may not reach, following your own unfolding process with curiosity and compassion.",
     "principles": [
-      { "number": "01", "title": "Mindfulness", "description": "Slowing down enough to notice what is happening, here and now." },
-      { "number": "02", "title": "The body", "description": "Listening for information held in sensation, breath, posture, and movement." },
-      { "number": "03", "title": "Curiosity", "description": "Meeting experience gently, without diagnosing, forcing, or rushing to fix it." },
-      { "number": "04", "title": "Transformation", "description": "Making space for old beliefs and patterns to become visible and begin to change." }
+      {
+        "number": "01",
+        "title": "Mindfulness",
+        "description": "Slowing down enough to notice what is happening, here and now."
+      },
+      {
+        "number": "02",
+        "title": "The body",
+        "description": "Listening for information held in sensation, breath, posture, and movement."
+      },
+      {
+        "number": "03",
+        "title": "Curiosity",
+        "description": "Meeting experience gently, without diagnosing, forcing, or rushing to fix it."
+      },
+      {
+        "number": "04",
+        "title": "Transformation",
+        "description": "We meet old beliefs and patterns where they live in the body and psyche and interacting with their particular medicine, message and meaning. Their symptoms can then be honored, integrated and transformed into wisdom."
+      }
     ]
   },
   "permission": {
     "eyebrow": "At your own pace",
     "heading": "A permission structure is something we create together.",
-    "paragraphOne": "It is a therapeutic space in which nothing is forced or rushed. Together, we create enough steadiness for experiences that have felt overwhelming, frightening, or inaccessible to emerge gently.",
-    "paragraphTwo": "You remain an active participant. You can slow down, pause, or change direction at any moment.",
-    "quote": "I hold a permission structure that helps people feel what has been too scary to feel. I meet them there and accompany them where they need to go.",
+    "paragraphOne": "Nothing is forced or rushed. Together, we create enough steadiness for experiences that have felt overwhelming, frightening, or inaccessible to emerge spontaneously.",
+    "paragraphTwo": "Your sense of safety is paramount. You remain an active participant. You can slow down, pause, or change direction at any moment.",
+    "quote": "I am an elder in age and experience and if there is anything I have learned, it's how to sit with my own, at times unyielding discomfort, and develop eyes that can see in the dark. It has created a certain capacity to sit with others who may be experiencing their own unyielding life challenges.",
     "attribution": "— Elana, Hakomi practitioner"
   },
   "possibility": {
@@ -50,8 +66,8 @@
     "items": [
       "Old patterns may begin to loosen.",
       "Choice can appear where reaction once lived.",
-      "Your relationship with yourself may soften.",
-      "The future may feel wider than it did before."
+      "Hardened emotional patterns and moods may soften.",
+      "A different future becomes available."
     ]
   },
   "sessions": {
@@ -61,12 +77,13 @@
     "buttonLabel": "What to Expect",
     "cardHeading": "In a session, we may notice",
     "items": [
-      "Physical sensations and breath",
+      "Physical sensations textures and breath",
       "Emotions, images, and memories",
       "Posture, gestures, or impulses",
       "Protective responses",
       "Words or beliefs that arise",
-      "Places of tension, openness, or movement"
+      "Places of tension, openness, or movement",
+      "When trauma is involved, aborted fight or flight responses can get frozen in the body. We may work to simulate, physically or imaginally, a snapshot of when and how the survival impulse got thwarted and stuck in the nervous system. And then with infinite patience and honoring of the protective mechanisms of the psyche, we can follow some of those thwarted impulses into completion. Simultaneously we attend to the primal need for embodied safety. We may pendulate between these two poles until the trauma is resolved."
     ]
   }
 }
