@@ -17,10 +17,10 @@ collections:
     folder: src/content/blog
     create: true
     extension: md
-    slug: "{{slug}}"
+    slug: "{{title}}"
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, hint: "Used in the page URL." }
+      - { label: Slug, name: slug, widget: string, required: false, hint: "Optional. Leave blank to generate the URL from the title." }
       - { label: Publish date, name: publishDate, widget: datetime, time_format: false }
       - { label: Updated date, name: updatedDate, widget: datetime, required: false, time_format: false }
       - { label: Author, name: author, widget: string, default: Elana }
@@ -31,8 +31,7 @@ collections:
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: SEO title, name: seoTitle, widget: string, required: false }
       - { label: Meta description, name: metaDescription, widget: text, required: false }
-      - { label: Social sharing image, name: socialImage, widget: image, required: false }
-      - { label: Draft, name: draft, widget: boolean, default: true }
+      - { label: Draft, name: draft, widget: boolean, required: false, default: false }
       - { label: Body content, name: body, widget: markdown }
   - name: testimonials
     label: Testimonials

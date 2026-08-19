@@ -98,7 +98,7 @@ h3 {
   font-family: var(--serif);
   font-size: clamp(1.45rem, 2.4vw, 1.6rem);
   margin-top: 1.6rem;
-  line-height: 1.42;
+  line-height: 1.2;
 }
 .muted {
   color: var(--ink);

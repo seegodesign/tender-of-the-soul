@@ -1,1 +1,14 @@
-{"seo":{"title":"Journal | Tender of the Soul","description":"Reflections on Hakomi, somatic work, emotional patterns, and mindful body-centered practice."},"hero":{"eyebrow":"The journal","title":"Notes for the inward life.","introduction":"Gentle reflections on Hakomi, the body, emotional patterns, and the quiet work of becoming more available to your own experience."},"readLabel":"Read reflection","backLabel":"Back to the journal","authorPrefix":"Written by"}
+{
+  "seo": {
+    "title": "Journal | Tender of the Soul",
+    "description": "Reflections on Hakomi, somatic work, emotional patterns, and mindful body-centered practice."
+  },
+  "hero": {
+    "eyebrow": "The journal",
+    "title": "Soma diaries.",
+    "introduction": "Gentle reflections on Hakomi, the body, emotional patterns, and the quiet work of becoming more available to your own experience."
+  },
+  "readLabel": "Read reflection",
+  "backLabel": "Back to the journal",
+  "authorPrefix": "Written by"
+}

@@ -1,13 +1,22 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const emptyToUndefined = (value: unknown) => (value === '' ? undefined : value);
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
-    title: z.string(), publishDate: z.coerce.date(), updatedDate: z.coerce.date().optional(),
-    author: z.string().default('Elana'), excerpt: z.string(), featuredImage: z.string().optional(),
-    featuredImageAlt: z.string().optional(), category: z.string(), tags: z.array(z.string()).default([]),
-    seoTitle: z.string().optional(), metaDescription: z.string().optional(), socialImage: z.string().optional(),
+    title: z.string(),
+    publishDate: z.coerce.date(),
+    updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
+    author: z.string().default('Elana'),
+    excerpt: z.string(),
+    featuredImage: z.preprocess(emptyToUndefined, z.string().optional()),
+    featuredImageAlt: z.preprocess(emptyToUndefined, z.string().optional()),
+    category: z.string(),
+    tags: z.array(z.string()).default([]),
+    seoTitle: z.preprocess(emptyToUndefined, z.string().optional()),
+    metaDescription: z.preprocess(emptyToUndefined, z.string().optional()),
     draft: z.boolean().default(false)
   })
 });

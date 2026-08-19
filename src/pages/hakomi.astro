@@ -1,10 +1,82 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import Principles from '../components/Principles.astro'; import page from '../data/hakomi.json';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Principles from "../components/Principles.astro";
+import page from "../data/hakomi.json";
 ---
-<BaseLayout title={page.seo.title} description={page.seo.description}><PageHero eyebrow={page.hero.eyebrow} title={page.hero.title} intro={page.hero.introduction}/>
-<section class="section"><div class="narrow prose"><p class="lead">{page.overview.lead}</p><p>{page.overview.paragraphOne}</p><p>{page.overview.paragraphTwo}</p></div></section>
-<section class="section soft-panel"><div class="container"><p class="eyebrow">{page.foundations.eyebrow}</p><h2 style="max-width:760px;margin-bottom:3rem">{page.foundations.heading}</h2><Principles items={page.foundations.items}/></div></section>
-<section class="section"><div class="container grid-2"><div><p class="eyebrow">{page.signals.eyebrow}</p><h2>{page.signals.heading}</h2></div><div class="signals">{page.signals.items.map(x=><span>{x}</span>)}</div></div></section>
-<section class="section dark"><div class="narrow"><p class="eyebrow">{page.process.eyebrow}</p><h2>{page.process.heading}</h2><p>{page.process.paragraphOne}</p><p>{page.process.paragraphTwo}</p><p class="lead">{page.process.statement}</p></div></section>
-<section class="section"><div class="narrow prose"><h2>{page.related.heading}</h2><p>{page.related.paragraphOne}</p><p>{page.related.paragraphTwo}</p><h2>{page.fit.heading}</h2><p>{page.fit.body}</p><a class="button" href="/contact">{page.fit.buttonLabel}</a></div></section></BaseLayout>
-<style>.signals{display:flex;flex-wrap:wrap;gap:.75rem}.signals span{padding:.8rem 1.1rem;border:1px solid var(--line);border-radius:99px}.dark{background:var(--forest);color:var(--cream)}.dark p{color:#c4cec1}.dark .lead{color:var(--cream);margin-top:2.5rem}</style>
+
+<BaseLayout title={page.seo.title} description={page.seo.description}
+  ><PageHero
+    eyebrow={page.hero.eyebrow}
+    title={page.hero.title}
+    intro={page.hero.introduction}
+  />
+  <section class="section">
+    <div class="narrow prose">
+      <h2 class="lead">{page.overview.lead}</h2><p>
+        {page.overview.paragraphOne}
+      </p><p>{page.overview.paragraphTwo}</p>
+    </div>
+  </section>
+  <section class="section soft-panel">
+    <div class="container">
+      <p class="eyebrow">{page.foundations.eyebrow}</p><h2
+        style="max-width:760px;margin-bottom:3rem"
+      >
+        {page.foundations.heading}
+      </h2><Principles items={page.foundations.items} />
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid-2">
+      <div>
+        <p class="eyebrow">{page.signals.eyebrow}</p><h2>
+          {page.signals.heading}
+        </h2>
+      </div><div class="signals">
+        {page.signals.items.map((x) => <span>{x}</span>)}
+      </div>
+    </div>
+  </section>
+  <section class="section dark">
+    <div class="narrow">
+      <p class="eyebrow">{page.process.eyebrow}</p><h2>
+        {page.process.heading}
+      </h2><p>{page.process.paragraphOne}</p><p>
+        {page.process.paragraphTwo}
+      </p><p class="lead">{page.process.statement}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="narrow prose">
+      <h2>{page.related.heading}</h2><p>{page.related.paragraphOne}</p><p>
+        {page.related.paragraphTwo}
+      </p><h2>{page.fit.heading}</h2><p>{page.fit.body}</p><a
+        class="button"
+        href="/contact">{page.fit.buttonLabel}</a>
+    </div>
+  </section></BaseLayout
+>
+<style>
+  .signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .signals span {
+    padding: 0.8rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+  }
+  .dark {
+    background: var(--forest);
+    color: var(--cream);
+  }
+  .dark p {
+    color: #c4cec1;
+  }
+  .dark .lead {
+    color: var(--cream);
+    margin-top: 2.5rem;
+  }
+</style>
