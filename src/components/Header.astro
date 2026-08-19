@@ -1,56 +1,160 @@
 ---
 const path = Astro.url.pathname;
-import site from '../data/site.json';
+import site from "../data/site.json";
 const links = [
-  ['/about',site.navigation.about], ['/hakomi',site.navigation.hakomi], ['/sessions',site.navigation.sessions],
-  ['/blog',site.navigation.journal], ['/contact',site.navigation.contact]
+  ["/about", site.navigation.about],
+  ["/hakomi", site.navigation.hakomi],
+  ["/sessions", site.navigation.sessions],
+  ["/blog", site.navigation.journal],
+  ["/contact", site.navigation.contact],
 ];
 ---
+
 <header class="site-header" data-header>
   <div class="inner">
-    <a class="brand" href="/" aria-label="Tender of the Soul, home">
-      <span class="mark" aria-hidden="true">T</span>
-      <span>{site.practiceName}</span>
+    <a class="brand" href="/">
+      <img
+        src="/images/uploads/logo.svg"
+        alt={site.practiceName}
+        width="2182"
+        height="533"
+      />
     </a>
-    <button class="menu-button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">{site.navigation.menuLabel}</span></button>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav"
+      ><span></span><span></span><span></span><span class="sr-only"
+        >{site.navigation.menuLabel}</span
+      ></button
+    >
     <nav id="site-nav" aria-label={site.navigation.ariaLabel}>
-      {links.map(([href,label]) => <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>)}
+      {
+        links.map(([href, label]) => (
+          <a
+            href={href}
+            aria-current={path.startsWith(href) ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))
+      }
       <a class="button" href="/contact">{site.discoveryCallLabel}</a>
     </nav>
   </div>
 </header>
 <script>
   function initializeMenu() {
-    const button = document.querySelector<HTMLButtonElement>('.menu-button');
-    const nav = document.querySelector<HTMLElement>('#site-nav');
+    const button = document.querySelector<HTMLButtonElement>(".menu-button");
+    const nav = document.querySelector<HTMLElement>("#site-nav");
     if (!button || button.dataset.initialized) return;
-    button.dataset.initialized = 'true';
-    button.addEventListener('click', () => {
-      const open = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!open));
-      nav?.classList.toggle('open', !open);
-      document.body.classList.toggle('menu-open', !open);
+    button.dataset.initialized = "true";
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!open));
+      nav?.classList.toggle("open", !open);
+      document.body.classList.toggle("menu-open", !open);
     });
   }
-  document.addEventListener('astro:page-load', initializeMenu);
+  document.addEventListener("astro:page-load", initializeMenu);
   initializeMenu();
 </script>
 <style>
-  .site-header { position: absolute; z-index: 20; top: 0; left: 0; width: 100%; color: var(--ink); }
-  .inner { width: min(calc(100% - 40px), 1320px); min-height: 94px; margin: auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(32,53,47,.18); }
-  .brand { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--serif); font-size: 1.35rem; text-decoration: none; line-height: 1; }
-  .brand i { font-size: .7em; font-weight: 300; }
-  .mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: 1rem; }
-  nav { display: flex; align-items: center; gap: clamp(1.15rem, 2vw, 2rem); }
-  nav > a:not(.button) { position: relative; font-size: .92rem; font-weight: 500; text-decoration: none; }
-  nav > a[aria-current="page"]::after { content:""; position: absolute; left: 0; right: 0; bottom: -.5rem; height: 1px; background: var(--clay); }
-  nav .button { min-height: 44px; padding-inline: 1.15rem; }
-  .menu-button { display: none; border: 0; background: transparent; padding: 10px; }
-  .menu-button span:not(.sr-only) { display: block; width: 25px; height: 1px; margin: 6px; background: currentColor; }
+  .site-header {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--ink);
+  }
+  .inner {
+    width: min(calc(100% - 40px), 1320px);
+    min-height: 230px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(32, 53, 47, 0.18);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    text-decoration: none;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+  .brand img {
+    display: block;
+    width: 350px;
+    height: auto;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.15rem, 2vw, 2rem);
+  }
+  nav > a:not(.button) {
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  nav > a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.5rem;
+    height: 1px;
+    background: var(--clay);
+  }
+  nav .button {
+    min-height: 44px;
+    padding-inline: 1.15rem;
+  }
+  .menu-button {
+    display: none;
+    border: 0;
+    background: transparent;
+    padding: 10px;
+  }
+  .menu-button span:not(.sr-only) {
+    display: block;
+    width: 25px;
+    height: 1px;
+    margin: 6px;
+    background: currentColor;
+  }
   @media (max-width: 900px) {
-    .menu-button { display: block; }
-    nav { position: fixed; inset: 0; z-index: -1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 90px 10vw 40px; background: var(--cream); opacity: 0; pointer-events: none; transition: opacity .25s; }
-    nav.open { opacity: 1; pointer-events: auto; }
-    nav > a:not(.button) { font-family: var(--serif); font-size: 2.2rem; }
+    .inner {
+      min-height: 96px;
+    }
+    .brand img {
+      width: min(350px, calc(100vw - 120px));
+    }
+    .menu-button {
+      display: block;
+    }
+    nav {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 90px 10vw 40px;
+      background: var(--cream);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    nav > a:not(.button) {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+    }
   }
 </style>

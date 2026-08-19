@@ -16,8 +16,7 @@
   "details": [
     { "label": "Location", "value": "Kauaʻi, Hawaiʻi · online and in person" },
     { "label": "Session length", "value": "60–90 minutes" },
-    { "label": "Response time", "value": "Typically within 2–3 business days" },
-    { "label": "Email", "value": "[Add practice email in CMS]" }
+    { "label": "Response time", "value": "Typically within 2–3 business days" }
   ],
   "urgentNotice": {
     "heading": "Please do not use this form for urgent support.",
@@ -40,6 +39,9 @@
     "consentLabel": "I understand this form is not monitored for urgent or crisis support.",
     "buttonLabel": "Send My Note",
     "privacyPrefix": "Your information is used only to respond to your inquiry. Please review the",
-    "privacyLinkLabel": "privacy policy"
+    "privacyLinkLabel": "privacy policy",
+    "successHeading": "Thank you for reaching out.",
+    "successBody": "Your note has been received. Elana will respond, typically within 2–3 business days.",
+    "errorMessage": "Something went wrong sending your note. Please try again in a moment."
   }
 }

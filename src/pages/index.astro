@@ -8,13 +8,13 @@ import home from "../data/home.json";
   <section class="hero">
     <div class="hero-image" role="img" aria-label={home.hero.imageAlt}></div>
     <div class="container hero-content">
-      <p class="eyebrow">{home.hero.eyebrow}</p>
       <h1>{home.hero.headline}</h1>
       <p class="intro">{home.hero.introduction}</p>
       <div class="actions">
         <a class="button" href="/contact">{home.hero.primaryCta}</a><a
           class="button outline"
-          href="/hakomi">{home.hero.secondaryCta}</a>
+          href="/hakomi">{home.hero.secondaryCta}</a
+        >
       </div>
       <p class="location">{home.hero.locationLine}</p>
     </div>
@@ -31,7 +31,8 @@ import home from "../data/home.json";
         <p class="lead">{home.welcome.statement}</p><p class="muted">
           {home.welcome.body}
         </p><a class="text-link" href="/about"
-          >{home.welcome.linkLabel} <span>→</span></a>
+          >{home.welcome.linkLabel} <span>→</span></a
+        >
       </div>
     </div>
   </section>
@@ -40,7 +41,8 @@ import home from "../data/home.json";
     <div class="container grid-2">
       <div class="arch" aria-hidden="true">
         <div></div><span>{home.insight.diagramLabelOne}</span><span
-          >{home.insight.diagramLabelTwo}</span>
+          >{home.insight.diagramLabelTwo}</span
+        >
       </div>
       <div>
         <p class="eyebrow">{home.insight.eyebrow}</p><h2>
@@ -49,7 +51,8 @@ import home from "../data/home.json";
           {home.insight.paragraphOne}
         </p><p>{home.insight.paragraphTwo}</p><a
           class="text-link"
-          href="/hakomi">{home.insight.linkLabel} <span>→</span></a>
+          href="/hakomi">{home.insight.linkLabel} <span>→</span></a
+        >
       </div>
     </div>
   </section>
@@ -71,13 +74,14 @@ import home from "../data/home.json";
       <div>
         <p class="eyebrow">{home.permission.eyebrow}</p><h2>
           {home.permission.heading}
-        </h2><p>{home.permission.paragraphOne}</p><p>
-          {home.permission.paragraphTwo}
-        </p>
+        </h2><p>{home.permission.paragraphOne}</p>
+        <p>{home.permission.paragraphTwo}</p>
+        <p>{home.permission.paragraphThree}</p>
       </div>
       <blockquote>
         <p>“{home.permission.quote}”</p><cite
-          >{home.permission.attribution}</cite>
+          >{home.permission.attribution}</cite
+        >
       </blockquote>
     </div>
   </section>
@@ -99,7 +103,8 @@ import home from "../data/home.json";
           {home.sessions.heading}
         </h2><p>{home.sessions.introduction}</p><a
           class="button outline"
-          href="/sessions">{home.sessions.buttonLabel}</a>
+          href="/sessions">{home.sessions.buttonLabel}</a
+        >
       </div><div class="session-card">
         <span>{home.sessions.cardHeading}</span><ul>
           {home.sessions.items.map((item) => <li>{item}</li>)}
@@ -114,9 +119,10 @@ import home from "../data/home.json";
     min-height: 820px;
     height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     background: #d8d8c8;
     overflow: hidden;
+    padding-bottom: 80px;
   }
   .hero::after {
     content: "";
@@ -124,24 +130,26 @@ import home from "../data/home.json";
     inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(243, 238, 226, 0.95) 0%,
-      rgba(243, 238, 226, 0.76) 42%,
-      rgba(243, 238, 226, 0.04) 74%
+      #f3eee2f2 0%,
+      #f3eee2c2 22%,
+      #f3eee20a 74%
     );
   }
   .hero-image {
     position: absolute;
     inset: 0;
-    background: url("/images/uploads/kauai-hero.avif") center/cover no-repeat;
+    background: url("/images/uploads/hands-with-light.webp") center/cover
+      no-repeat;
   }
   .hero-content {
     position: relative;
     z-index: 2;
-    padding-top: 6rem;
+    width: min(calc(100% - 40px), 1320px);
   }
   .hero h1 {
     max-width: 790px;
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(3rem, 4vw, 6rem);
+    color: rgb(94, 72, 122);
   }
   .hero .intro {
     max-width: 620px;
@@ -158,6 +166,7 @@ import home from "../data/home.json";
     align-items: center;
     gap: 0.7rem;
     margin-top: 3rem;
+    margin-bottom: 0;
     font-size: 0.76rem;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -225,7 +234,7 @@ import home from "../data/home.json";
     margin-bottom: 4rem;
   }
   .approach-head > p {
-    color: #566a63;
+    color: var(--ink);
   }
   .permission {
     background: var(--forest);
@@ -241,7 +250,7 @@ import home from "../data/home.json";
   }
   .permission blockquote p {
     color: var(--cream);
-    font: clamp(1.7rem, 3vw, 2.8rem)/1.3 var(--serif);
+    font: clamp(1.7rem, 1.8vw, 2.8rem)/1.3 var(--serif);
   }
   .permission cite {
     color: var(--sage);

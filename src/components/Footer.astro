@@ -26,10 +26,28 @@ import site from '../data/site.json';
   <div class="copyright container">© {new Date().getFullYear()} {site.practiceName} <span>{site.footer.creditPrefix} <a href={site.footer.creditUrl} target="_blank" rel="noopener">{site.footer.creditLabel}</a></span></div>
 </footer>
 <style>
-  .cta { padding: clamp(5rem,10vw,9rem) 0; background: var(--mist); color: var(--ink); text-align: center; }
-  .cta .eyebrow { justify-content:center; }
-  .cta h2 { max-width: 850px; margin: auto; }
-  .cta p:not(.eyebrow) { max-width: 600px; margin: 1.5rem auto 2rem; }
+  .cta {
+    position: relative;
+    padding: clamp(5rem,10vw,9rem) 0;
+    background: url("/images/uploads/kauai-hero.avif") center/cover no-repeat;
+    color: var(--ink);
+    text-align: left;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(245, 240, 231, 0.38) 0%,
+      rgba(245, 240, 231, 0.52) 100%
+    );
+    pointer-events: none;
+  }
+  .cta .container { position: relative; z-index: 1; }
+  .cta h2 { max-width: 850px; }
+  .cta p:not(.eyebrow) { max-width: 600px; margin: 1.5rem 0 2rem; }
   footer { background: var(--forest); color: var(--cream); }
   .foot { display: grid; grid-template-columns: 1fr .55fr 1.25fr; gap: 4rem; padding-block: 5rem 3rem; }
   .wordmark { font-family: var(--serif); font-size: 2rem; text-decoration: none; }

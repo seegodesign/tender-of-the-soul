@@ -1,0 +1,409 @@
+fragment BlogParts on Blog {
+  __typename
+  title
+  slug
+  publishDate
+  updatedDate
+  author
+  excerpt
+  featuredImage
+  featuredImageAlt
+  category
+  tags
+  seoTitle
+  metaDescription
+  socialImage
+  draft
+  body
+}
+
+fragment FaqsParts on Faqs {
+  __typename
+  question
+  category
+  order
+  body
+}
+
+fragment TestimonialsParts on Testimonials {
+  __typename
+  clientName
+  descriptor
+  featured
+  order
+  placeholder
+  body
+}
+
+fragment LegalParts on Legal {
+  __typename
+  title
+  seoTitle
+  eyebrow
+  introduction
+  updatedLabel
+  order
+  body
+}
+
+fragment HomePageParts on HomePage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    headline
+    introduction
+    primaryCta
+    secondaryCta
+    locationLine
+    imageAlt
+  }
+  welcome {
+    __typename
+    eyebrow
+    heading
+    statement
+    body
+    linkLabel
+  }
+  insight {
+    __typename
+    eyebrow
+    heading
+    lead
+    paragraphOne
+    paragraphTwo
+    linkLabel
+    diagramLabelOne
+    diagramLabelTwo
+  }
+  approach {
+    __typename
+    eyebrow
+    heading
+    introduction
+    principles {
+      __typename
+      number
+      title
+      description
+    }
+  }
+  permission {
+    __typename
+    eyebrow
+    heading
+    paragraphOne
+    paragraphTwo
+    quote
+    attribution
+  }
+  possibility {
+    __typename
+    eyebrow
+    heading
+    items
+  }
+  sessions {
+    __typename
+    eyebrow
+    heading
+    introduction
+    buttonLabel
+    cardHeading
+    items
+  }
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+  portrait {
+    __typename
+    image
+    altText
+    placeholderHeading
+    placeholderNote
+  }
+  introduction {
+    __typename
+    eyebrow
+    heading
+    statement
+    paragraphOne
+    paragraphTwo
+  }
+  orientation {
+    __typename
+    eyebrow
+    heading
+    statement
+    body
+  }
+  credentials {
+    __typename
+    eyebrow
+    heading
+    introduction
+    items {
+      __typename
+      label
+      description
+    }
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+  introduction {
+    __typename
+    eyebrow
+    heading
+    body
+  }
+  details {
+    __typename
+    label
+    value
+  }
+  urgentNotice {
+    __typename
+    heading
+    body
+  }
+  form {
+    __typename
+    firstNameLabel
+    lastNameLabel
+    emailLabel
+    phoneLabel
+    optionalLabel
+    meetingLegend
+    meetingOptions {
+      __typename
+      label
+      value
+    }
+    messageLabel
+    messageGuidance
+    consentLabel
+    buttonLabel
+    privacyPrefix
+    privacyLinkLabel
+  }
+}
+
+fragment FaqsPageParts on FaqsPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+}
+
+fragment HakomiPageParts on HakomiPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+  overview {
+    __typename
+    lead
+    paragraphOne
+    paragraphTwo
+  }
+  foundations {
+    __typename
+    eyebrow
+    heading
+    items {
+      __typename
+      number
+      title
+      description
+    }
+  }
+  signals {
+    __typename
+    eyebrow
+    heading
+    items
+  }
+  process {
+    __typename
+    eyebrow
+    heading
+    paragraphOne
+    paragraphTwo
+    statement
+  }
+  related {
+    __typename
+    heading
+    paragraphOne
+    paragraphTwo
+  }
+  fit {
+    __typename
+    heading
+    body
+    buttonLabel
+  }
+}
+
+fragment JournalPageParts on JournalPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+  readLabel
+  backLabel
+  authorPrefix
+}
+
+fragment NotFoundPageParts on NotFoundPage {
+  __typename
+  seoTitle
+  eyebrow
+  heading
+  body
+  homeButton
+  contactButton
+}
+
+fragment SessionsPageParts on SessionsPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    introduction
+  }
+  details {
+    __typename
+    number
+    heading
+    body
+  }
+  expect {
+    __typename
+    eyebrow
+    heading
+    paragraphOne
+    paragraphTwo
+    steps {
+      __typename
+      heading
+      body
+    }
+  }
+  choice {
+    __typename
+    quote
+    eyebrow
+    heading
+    paragraphOne
+    paragraphTwo
+  }
+  firstSession {
+    __typename
+    eyebrow
+    heading
+    statement
+    body
+    buttonLabel
+  }
+}
+
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  practiceName
+  practitionerName
+  email
+  phone
+  location
+  socialLinks
+  discoveryCallLabel
+  contactFormHeading
+  contactFormIntroduction
+  defaultSeoTitle
+  defaultMetaDescription
+  defaultSocialImage
+  footerDisclaimer
+  crisisDisclaimer
+  navigation {
+    __typename
+    about
+    hakomi
+    sessions
+    faqs
+    journal
+    contact
+    menuLabel
+    ariaLabel
+  }
+  footer {
+    __typename
+    ctaEyebrow
+    ctaHeading
+    ctaBody
+    ctaButton
+    practiceDescription
+    locationLine
+    importantLabel
+    privacyLabel
+    disclaimerLabel
+    creditPrefix
+    creditLabel
+    creditUrl
+  }
+}

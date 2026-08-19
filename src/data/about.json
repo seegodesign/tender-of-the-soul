@@ -9,7 +9,7 @@
     "introduction": "A compassionate, body-centered relationship where your experience is honored, your pace matters, and nothing needs to be forced."
   },
   "portrait": {
-    "image": "",
+    "image": "/images/uploads/meet-elana.webp",
     "altText": "Portrait of Elana",
     "placeholderHeading": "Practitioner portrait",
     "placeholderNote": "Replace through CMS before launch"
@@ -19,39 +19,13 @@
     "heading": "Presence before prescription.",
     "statement": "I hold a permission structure that helps you feel what may be too scary to feel on your own. It is always your choice how much or how deep to go. I am there with you every step of the way, and I accompany you where your deeper calling is wanting you to go.",
     "paragraphOne": "My role is not to tell you where your process should lead. It is to offer attentive, grounded companionship as we listen for what is already asking to be known.",
-    "paragraphTwo": "I work with adults navigating the effects of painful experiences, anxiety, grief, chronic stress, burnout, life transitions, relationship patterns, and the feeling of being stuck or disconnected from themselves."
+    "paragraphTwo": "I work with adults navigating the effects of painful experiences, anxiety, grief, chronic stress, burnout, life transitions, relationship patterns, and the feeling of being stuck or disconnected from themselves.",
+    "paragraphThree": "Elana is also a singer and ceremonialist. Voice, song, and the making of meaningful gatherings live alongside this practice, and sometimes inform it. They are offered separately."
   },
   "orientation": {
     "eyebrow": "My orientation",
     "heading": "The body is not an obstacle to overcome.",
     "statement": "It is often where adaptation, memory, longing, and quiet wisdom have been held.",
     "body": "With mindfulness and curiosity, we can approach these places without demanding that they change. This creates room for the patterns beneath the surface to become visible, and perhaps to soften and open."
-  },
-  "credentials": {
-    "eyebrow": "Hakomi Institute of California and Hakomi Mallorca, ISITTA Trauma Training",
-    "heading": "Practice details",
-    "introduction": "Specific credentials are intentionally left as visible placeholders until Elana’s verified training information is supplied.",
-    "items": [
-      {
-        "label": "Hakomi training",
-        "description": "[Add verified training, institution, and completion status]"
-      },
-      {
-        "label": "Trauma training",
-        "description": "[Add verified program and completion status]"
-      },
-      {
-        "label": "Additional modalities",
-        "description": "[Add modalities and accurately describe level of training]"
-      },
-      {
-        "label": "Education & memberships",
-        "description": "[Add relevant education and professional memberships]"
-      },
-      {
-        "label": "Scope of practice",
-        "description": "[Add locally reviewed scope-of-practice language]"
-      }
-    ]
   }
 }

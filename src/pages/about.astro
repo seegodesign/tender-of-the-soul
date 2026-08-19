@@ -11,7 +11,7 @@ import about from "../data/about.json";
     intro={about.hero.introduction}
   />
   <section class="section">
-    <div class="container grid-2">
+    <div class="container grid-2" style="align-items: flex-start;">
       <div
         class:list={["portrait", { "has-image": about.portrait.image }]}
         style={about.portrait.image
@@ -34,7 +34,9 @@ import about from "../data/about.json";
           {about.introduction.heading}
         </h2><p class="lead">{about.introduction.statement}</p><p>
           {about.introduction.paragraphOne}
-        </p><p>{about.introduction.paragraphTwo}</p>
+        </p><p>{about.introduction.paragraphTwo}</p><p>
+          {about.introduction.paragraphThree}
+        </p>
       </div>
     </div>
   </section>
@@ -45,26 +47,6 @@ import about from "../data/about.json";
       </h2><p class="lead">{about.orientation.statement}</p><p>
         {about.orientation.body}
       </p>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container credentials">
-      <div>
-        <p class="eyebrow">{about.credentials.eyebrow}</p><h2>
-          {about.credentials.heading}
-        </h2><p>{about.credentials.introduction}</p>
-      </div><dl>
-        {
-          about.credentials.items.map((item) => (
-            <div>
-              <>
-                <dt>{item.label}</dt>
-                <dd>{item.description}</dd>
-              </>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </section>
 </BaseLayout>
@@ -88,36 +70,7 @@ import about from "../data/about.json";
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .credentials {
-    display: grid;
-    grid-template-columns: 0.7fr 1.3fr;
-    gap: 5rem;
-  }
-  .credentials dl {
-    margin: 0;
-  }
-  .credentials dl div {
-    display: grid;
-    grid-template-columns: 0.55fr 1fr;
-    padding: 1.3rem 0;
-    border-top: 1px solid var(--line);
-  }
-  dt {
-    font-weight: 600;
-  }
-  dd {
-    margin: 0;
-    color: #687872;
-  }
   @media (max-width: 760px) {
-    .credentials {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    .credentials dl div {
-      grid-template-columns: 1fr;
-      gap: 0.3rem;
-    }
     .portrait {
       min-height: 450px;
     }

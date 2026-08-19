@@ -131,6 +131,7 @@ collections:
               - { label: Heading, name: heading, widget: string }
               - { label: First paragraph, name: paragraphOne, widget: text }
               - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - { label: Third paragraph, name: paragraphThree, widget: text }
               - { label: Quote, name: quote, widget: text }
               - { label: Attribution, name: attribution, widget: string }
           - label: Possibilities
@@ -184,6 +185,7 @@ collections:
               - { label: Practitioner statement, name: statement, widget: text }
               - { label: First paragraph, name: paragraphOne, widget: text }
               - { label: Second paragraph, name: paragraphTwo, widget: text }
+              - { label: Third paragraph, name: paragraphThree, widget: text }
           - label: Orientation
             name: orientation
             widget: object
@@ -192,20 +194,6 @@ collections:
               - { label: Heading, name: heading, widget: string }
               - { label: Lead statement, name: statement, widget: text }
               - { label: Body, name: body, widget: text }
-          - label: Training and background
-            name: credentials
-            widget: object
-            fields:
-              - { label: Kicker, name: eyebrow, widget: string }
-              - { label: Heading, name: heading, widget: string }
-              - { label: Introduction, name: introduction, widget: text }
-              - label: Practice details
-                name: items
-                widget: list
-                min: 1
-                fields:
-                  - { label: Label, name: label, widget: string }
-                  - { label: Description, name: description, widget: text }
       - label: Contact
         name: contact
         file: src/data/contact.json
@@ -266,6 +254,9 @@ collections:
               - { label: Submit-button label, name: buttonLabel, widget: string }
               - { label: Privacy-note introduction, name: privacyPrefix, widget: text }
               - { label: Privacy-policy link label, name: privacyLinkLabel, widget: string }
+              - { label: Success heading, name: successHeading, widget: string }
+              - { label: Success message, name: successBody, widget: text }
+              - { label: Error message, name: errorMessage, widget: text }
       - label: Hakomi
         name: hakomi
         file: src/data/hakomi.json

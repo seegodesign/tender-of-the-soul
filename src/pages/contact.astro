@@ -33,15 +33,24 @@ import contact from "../data/contact.json";
           {contact.urgentNotice.body}
         </aside>
       </div>
-      <form
-        name="discovery-call"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="discovery-call" />
+      <div class="form-panel">
+        <form
+          id="discovery-call"
+          name="discovery-call"
+          action="https://submit-form.com/wkoysmRn9"
+          method="POST"
+          data-error-message={contact.form.errorMessage}
+        >
         <p class="sr-only">
-          <label>Don’t fill this out: <input name="bot-field" /></label>
+          <label
+            >Leave this field empty
+            <input
+              type="text"
+              name="_honeypot"
+              tabindex="-1"
+              autocomplete="off"
+            /></label
+          >
         </p>
         <div class="field-row">
           <label
@@ -93,6 +102,7 @@ import contact from "../data/contact.json";
           ><input type="checkbox" required name="consent" />
           {contact.form.consentLabel}</label
         >
+        <p class="form-status" data-form-status hidden role="alert"></p>
         <button class="button" type="submit"
           >{contact.form.buttonLabel} <span aria-hidden="true">→</span></button
         >
@@ -101,6 +111,12 @@ import contact from "../data/contact.json";
           <a href="/privacy">{contact.form.privacyLinkLabel}</a>.
         </p>
       </form>
+      <div class="form-success" data-form-success hidden tabindex="-1">
+        <p class="eyebrow">Sent</p>
+        <h2>{contact.form.successHeading}</h2>
+        <p>{contact.form.successBody}</p>
+      </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -132,36 +148,44 @@ import contact from "../data/contact.json";
     background: var(--mist);
     font-size: 0.78rem;
   }
-  form {
+  .form-panel {
     padding: clamp(1.5rem, 4vw, 3rem);
     background: var(--cream);
     box-shadow: var(--shadow);
+  }
+  .form-status {
+    margin: 0 0 1rem;
+    color: var(--clay-dark);
+    font-size: 0.95rem;
+  }
+  .form-success h2 {
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 4vw, 3.2rem);
   }
   label,
   legend {
     display: block;
     margin-bottom: 1.25rem;
-    font-size: 0.78rem;
+    font-size: 1.05rem;
     font-weight: 600;
   }
   label span {
-    color: #718078;
+    color: var(--ink);
     font-weight: 400;
     display: block;
   }
-  input,
+  input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]),
   textarea {
     width: 100%;
     margin-top: 0.45rem;
-    padding: 0.85rem 0.15rem;
-    border: 0;
-    border-bottom: 1px solid #89968e;
-    border-radius: 0;
-    background: transparent;
+    padding: 0.85rem 0.9rem;
+    border: 1px solid #89968e;
+    border-radius: 4px;
+    background: var(--paper);
     color: var(--ink);
-    font: 1rem var(--sans);
+    font: 1.2rem var(--sans);
   }
-  input:focus,
+  input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]):focus,
   textarea:focus {
     outline: 2px solid var(--clay);
     outline-offset: 3px;
@@ -194,7 +218,7 @@ import contact from "../data/contact.json";
   }
   .form-note {
     margin-top: 1rem;
-    font-size: 0.72rem;
+    font-size: 0.92rem;
   }
   @media (max-width: 800px) {
     .contact-grid {
@@ -205,3 +229,58 @@ import contact from "../data/contact.json";
     }
   }
 </style>
+<script>
+  const FORM_ACTION = "https://submit-form.com/wkoysmRn9";
+
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>("#discovery-call");
+    const status = document.querySelector<HTMLElement>("[data-form-status]");
+    const success = document.querySelector<HTMLElement>("[data-form-success]");
+    const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    if (!form || !status || !success || !button || form.dataset.bound === "true") {
+      return;
+    }
+
+    form.dataset.bound = "true";
+    const defaultLabel = button.innerHTML;
+    const errorMessage =
+      form.dataset.errorMessage ??
+      "Something went wrong sending your note. Please try again in a moment.";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.hidden = true;
+      status.textContent = "";
+      button.disabled = true;
+      button.textContent = "Sending…";
+
+      const payload = Object.fromEntries(new FormData(form));
+
+      try {
+        const response = await fetch(FORM_ACTION, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+        success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch {
+        status.textContent = errorMessage;
+        status.hidden = false;
+        button.disabled = false;
+        button.innerHTML = defaultLabel;
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initContactForm);
+</script>
