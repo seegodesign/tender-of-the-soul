@@ -29,7 +29,7 @@ import contact from "../data/contact.json";
           }
         </dl>
         <aside>
-          <strong>{contact.urgentNotice.heading}</strong>
+          <strong>{contact.urgentNotice.heading}</strong>&nbsp;
           {contact.urgentNotice.body}
         </aside>
       </div>
@@ -107,7 +107,7 @@ import contact from "../data/contact.json";
           >{contact.form.buttonLabel} <span aria-hidden="true">→</span></button
         >
         <p class="form-note">
-          {contact.form.privacyPrefix}
+          {contact.form.privacyPrefix}&nbsp;
           <a href="/privacy">{contact.form.privacyLinkLabel}</a>.
         </p>
       </form>
@@ -124,7 +124,7 @@ import contact from "../data/contact.json";
   .contact-grid {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
-    gap: clamp(3rem, 8vw, 8rem);
+    gap: clamp(3rem, 8vw, 6rem);
     align-items: start;
   }
   .contact-grid dl div {
@@ -170,7 +170,7 @@ import contact from "../data/contact.json";
     font-weight: 600;
   }
   label span {
-    color: var(--ink);
+    color: var(--purple);
     font-weight: 400;
     display: block;
   }
@@ -182,7 +182,7 @@ import contact from "../data/contact.json";
     border: 1px solid #89968e;
     border-radius: 4px;
     background: var(--paper);
-    color: var(--ink);
+    color: var(--purple);
     font: 1.2rem var(--sans);
   }
   input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]):focus,

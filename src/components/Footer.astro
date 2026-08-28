@@ -1,36 +1,61 @@
 ---
-import site from '../data/site.json';
+import site from "../data/site.json";
 ---
+
 <footer>
   <section class="cta">
     <div class="container">
       <p class="eyebrow">{site.footer.ctaEyebrow}</p>
       <h2>{site.footer.ctaHeading}</h2>
       <p>{site.footer.ctaBody}</p>
-      <a class="button" href="/contact">{site.footer.ctaButton} <span aria-hidden="true">→</span></a>
+      <a class="button" href="/contact"
+        >{site.footer.ctaButton} <span aria-hidden="true">→</span></a
+      >
     </div>
   </section>
   <div class="foot container">
     <div>
       <a class="wordmark" href="/">{site.practiceName}</a>
-      <p>{site.footer.practiceDescription}<br>{site.footer.locationLine}</p>
+      <p>{site.footer.practiceDescription}<br />{site.footer.locationLine}</p>
     </div>
     <div class="links">
-      <a href="/about">{site.navigation.about}</a><a href="/hakomi">{site.navigation.hakomi}</a><a href="/sessions">{site.navigation.sessions}</a><a href="/faqs">{site.navigation.faqs}</a><a href="/blog">{site.navigation.journal}</a><a href="/contact">{site.navigation.contact}</a>
+      <a href="/about">{site.navigation.about}</a><a href="/hakomi"
+        >{site.navigation.hakomi}</a
+      ><a href="/sessions">{site.navigation.sessions}</a><a href="/faqs"
+        >{site.navigation.faqs}</a
+      ><a href="/blog">{site.navigation.journal}</a><a href="/contact"
+        >{site.navigation.contact}</a
+      >
     </div>
     <div class="legal">
-      <p><strong>{site.footer.importantLabel}</strong> {site.footerDisclaimer}</p>
-      <p><a href="/privacy">{site.footer.privacyLabel}</a> · <a href="/disclaimer">{site.footer.disclaimerLabel}</a></p>
+      <p>
+        <strong>{site.footer.importantLabel}</strong>&nbsp;
+        {site.footerDisclaimer}
+      </p>
+      <p>
+        <a href="/privacy">{site.footer.privacyLabel}</a> · <a
+          href="/disclaimer">{site.footer.disclaimerLabel}</a
+        >
+      </p>
     </div>
   </div>
-  <div class="copyright container">© {new Date().getFullYear()} {site.practiceName} <span>{site.footer.creditPrefix} <a href={site.footer.creditUrl} target="_blank" rel="noopener">{site.footer.creditLabel}</a></span></div>
+  <div class="copyright container">
+    © {new Date().getFullYear()}&nbsp;
+    {site.practiceName}
+    <span
+      >{site.footer.creditPrefix}&nbsp;
+      <a href={site.footer.creditUrl} target="_blank" rel="noopener"
+        >{site.footer.creditLabel}</a
+      ></span
+    >
+  </div>
 </footer>
 <style>
   .cta {
     position: relative;
-    padding: clamp(5rem,10vw,9rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
     background: url("/images/uploads/kauai-hero.avif") center/cover no-repeat;
-    color: var(--ink);
+    color: var(--purple);
     text-align: left;
     overflow: hidden;
   }
@@ -45,17 +70,70 @@ import site from '../data/site.json';
     );
     pointer-events: none;
   }
-  .cta .container { position: relative; z-index: 1; }
-  .cta h2 { max-width: 850px; }
-  .cta p:not(.eyebrow) { max-width: 600px; margin: 1.5rem 0 2rem; }
-  footer { background: var(--forest); color: var(--cream); }
-  .foot { display: grid; grid-template-columns: 1fr .55fr 1.25fr; gap: 4rem; padding-block: 5rem 3rem; }
-  .wordmark { font-family: var(--serif); font-size: 2rem; text-decoration: none; }
-  .wordmark i { font-size: .65em; }
-  .foot p { color: var(--sage); font-size: .8rem; line-height: 1.65; }
-  .links { display: flex; flex-direction: column; gap: .55rem; }
-  .links a, .legal a { color: var(--cream); font-size: .82rem; }
-  .placeholder { border-left: 2px solid var(--clay); padding-left: .75rem; }
-  .copyright { display: flex; justify-content: space-between; padding-block: 1.4rem; border-top: 1px solid rgba(255,255,255,.15); color: var(--sage); font-size: .72rem; }
-  @media(max-width:800px){ .foot{grid-template-columns:1fr;gap:2rem}.copyright{gap:1rem;flex-direction:column} }
+  .cta .container {
+    position: relative;
+    z-index: 1;
+  }
+  .cta h2 {
+    max-width: 850px;
+  }
+  .cta p:not(.eyebrow) {
+    max-width: 600px;
+    margin: 1.5rem 0 2rem;
+  }
+  footer {
+    background: var(--purple-dark);
+    color: var(--cream);
+  }
+  .foot {
+    display: grid;
+    grid-template-columns: 1fr 0.55fr 1.25fr;
+    gap: 4rem;
+    padding-block: 5rem 3rem;
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-size: 2rem;
+    text-decoration: none;
+  }
+  .wordmark i {
+    font-size: 0.65em;
+  }
+  .foot p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .links a,
+  .legal a {
+    color: var(--cream);
+    font-size: 0.82rem;
+  }
+  .placeholder {
+    border-left: 2px solid var(--clay);
+    padding-left: 0.75rem;
+  }
+  .copyright {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--sage);
+    font-size: 0.72rem;
+  }
+  @media (max-width: 800px) {
+    .foot {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .copyright {
+      gap: 1rem;
+      flex-direction: column;
+    }
+  }
 </style>

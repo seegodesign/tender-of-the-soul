@@ -1,7 +1,15 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Principles from "../components/Principles.astro";
 import home from "../data/home.json";
+
+const testimonials = (
+  await getCollection(
+    "testimonials",
+    ({ data }) => data.featured && !data.placeholder,
+  )
+).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Tender of the Soul | Hakomi & Somatic Work on Kauaʻi">
@@ -112,6 +120,28 @@ import home from "../data/home.json";
       </div>
     </div>
   </section>
+
+  {
+    testimonials.length > 0 && (
+      <section class="section testimonial" aria-label="Client testimonial">
+        <div class="narrow">
+          {testimonials.map((entry) => (
+            <blockquote>
+              <p>“{entry.body?.trim()}”</p>
+              <footer>
+                <cite>
+                  — {entry.data.clientName}
+                  {entry.data.descriptor && (
+                    <span>{entry.data.descriptor}</span>
+                  )}
+                </cite>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
 <style>
   .hero {
@@ -234,7 +264,7 @@ import home from "../data/home.json";
     margin-bottom: 4rem;
   }
   .approach-head > p {
-    color: var(--ink);
+    color: var(--purple);
   }
   .permission {
     background: var(--forest);
@@ -297,6 +327,42 @@ import home from "../data/home.json";
     border-bottom: 1px solid var(--line);
     font-family: var(--serif);
     font-size: 1.25rem;
+  }
+  .testimonial {
+    background: var(--cream);
+  }
+  .testimonial blockquote {
+    margin: 0;
+  }
+  .testimonial blockquote + blockquote {
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--line);
+  }
+  .testimonial blockquote p {
+    margin: 0;
+    color: var(--purple);
+    font-family: var(--serif);
+    font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+    line-height: 1.4;
+  }
+  .testimonial cite {
+    display: block;
+    margin-top: 2rem;
+    color: var(--purple);
+    font-size: 0.84rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .testimonial cite span {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--sage);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
   @media (max-width: 760px) {
     .hero {
