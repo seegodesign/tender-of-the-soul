@@ -2,20 +2,29 @@
 
 ## Newsletter signup on Cloudflare Pages
 
-The footer posts to `functions/api/newsletter.js`. This Pages Function uses Brevo's double opt-in API to add subscribers to **list 3 only after email confirmation**. The site still builds as static Astro; no Astro server adapter is required.
+The footer posts to `functions/api/newsletter.js`. This Pages Function uses Brevo's contacts API to add subscribers directly to **list 3**, without a confirmation email. Existing contacts are updated to include list 3; the request does not change email blocklist settings. The site still builds as static Astro; no Astro server adapter is required.
 
-In Cloudflare, select **Workers & Pages → tender-of-the-soul → Settings → Variables and Secrets** and add:
+In Cloudflare, select **Workers & Pages → tender-of-the-soul → Settings → Variables and Secrets** and add `BREVO_API_KEY` as a **secret**, containing your Brevo API key with permission to create and update contacts. No email template is required; `BREVO_DOI_TEMPLATE_ID` is no longer used and can be removed.
 
-- `BREVO_API_KEY`: a **secret**, containing your Brevo API key.
-- `BREVO_DOI_TEMPLATE_ID`: the numeric ID of an active Brevo double opt-in email template, with its confirmation link configured for the Brevo DOI API.
+Signup also requires Cloudflare Turnstile. In **Cloudflare → Turnstile**, create a **Managed** widget for `tender-of-the-soul.pages.dev`, `tenderofthesoul.com`, and `www.tenderofthesoul.com` (include only the domains you use). Add these settings to the Pages project's Production environment:
 
-Configure each deployment environment you use (Production for the main `tender-of-the-soul.pages.dev` URL; Preview for branch deployments). Redeploy after setting these values. Keep the existing build command `npm run build` and output directory `dist`. Cloudflare must deploy the root `functions/` directory along with the site through its Git integration or Wrangler; uploading only `dist` through the dashboard will not deploy the Function.
+| Setting | Type | Value |
+| --- | --- | --- |
+| `PUBLIC_TURNSTILE_SITEKEY` | Optional plain text override; available during the build | Defaults to the public Site Key `0x4AAAAAAGRvXLKyAKNqo4sB` configured in the footer |
+| `TURNSTILE_SECRET` | Secret; available to the Function | The widget's Secret Key; never prefix this with `PUBLIC_` |
+| `TURNSTILE_HOSTNAMES` | Plain text; available to the Function | `tender-of-the-soul.pages.dev,tenderofthesoul.com,www.tenderofthesoul.com` |
 
-In Brevo, look under **Marketing → Templates → Email** for the double opt-in confirmation template. Verify its sender and confirmation button before using its ID. See [Brevo's DOI API reference](https://developers.brevo.com/reference/create-doi-contact) and [Cloudflare Pages secrets](https://developers.cloudflare.com/pages/functions/bindings/#secrets).
+Rebuild and deploy after adding the settings: Astro embeds the public Site Key at build time. The endpoint refuses signup when server configuration is missing. Preview deployments need their own exact hostname in both the widget and their environment's `TURNSTILE_HOSTNAMES`; do not add arbitrary preview domains or localhost to the Production allowlist.
 
-Missing configuration returns an unavailable message without subscribing anyone. Successful submissions prompt visitors to check their inbox; the confirmation email returns them to the current site's homepage with a thank-you message. Local `astro dev` serves the site only; testing the Function requires Cloudflare's Pages runtime. Run the mocked endpoint tests with `node --test tests/newsletter.test.mjs`; these never send real email.
+The Function verifies every token with Cloudflare before contacting Brevo, requiring a successful result, action `signup`, and a hostname that matches both the request and the configured allowlist. The form refreshes its challenge after each submission because tokens are single-use; expired or failed checks disable submission. The existing honeypot remains in place. See [Turnstile server-side validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).
 
-For signup failures, open the deployment's **View details → Functions** logs before retrying. A browser 502 can represent a rejection from Brevo; the server log records its status, recognized error code, configured template/list IDs, and a filtered `reason`, without raw provider messages or subscriber details. `confirmation_template` means check that the configured template is active and valid for DOI; `api_key_permissions` means check the key's Transactional Email scope; `account_activation` means check the account's transactional sending activation; `subscriber_list` means check list 3 exists; `ip_authorization` means review Brevo's authorized IP settings. These categories are hints inferred from Brevo's message. `unknown` means the message could not be classified. See [Brevo error responses](https://developers.brevo.com/docs/how-it-works) and [DOI permission requirements](https://status.brevo.com/incidents/01M5VB1KY7D7A9P0M82JR2AHVE).
+For local frontend testing, set `PUBLIC_TURNSTILE_SITEKEY` in an ignored `.env` file using Cloudflare's [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/). For local Pages runtime testing, put server settings in ignored `.dev.vars` and use a local-only hostname allowlist. Never deploy test keys to Production. Mocked tests do not contact Cloudflare or Brevo; production validation still requires a fresh real token, a successful signup, and a replay rejection after deployment.
+
+Configure each deployment environment you use (Production for the main `tender-of-the-soul.pages.dev` URL; Preview for branch deployments). Redeploy after setting these values. Keep the existing build command `npm run build` and output directory `dist`. Cloudflare must deploy the root `functions/` directory along with the site through its Git integration or Wrangler; uploading only `dist` through the dashboard will not deploy the Function. See [Brevo's contacts API reference](https://developers.brevo.com/reference/create-contact) and [Cloudflare Pages secrets](https://developers.cloudflare.com/pages/functions/bindings/#secrets).
+
+Missing configuration returns an unavailable message without subscribing anyone. Successful submissions display a thank-you message immediately. Local `astro dev` serves the site only; testing the Function requires Cloudflare's Pages runtime. Run the mocked endpoint and form lifecycle tests with `node --test tests/newsletter*.test.mjs`; these never send real email.
+
+For signup failures, open the deployment's **View details → Functions** logs before retrying. A browser 502 can represent a rejection from Brevo; the server log records its status, recognized error code, list ID, and a filtered `reason`, without raw provider messages or subscriber details. `api_key_permissions` means check the key's contact permissions; `subscriber_list` means check list 3 exists; `ip_authorization` means review Brevo's authorized IP settings. These categories are hints inferred from Brevo's message. `unknown` means the message could not be classified. See [Brevo error responses](https://developers.brevo.com/docs/how-it-works).
 
 ```sh
 npm create astro@latest -- --template minimal

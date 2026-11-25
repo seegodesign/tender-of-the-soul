@@ -1,5 +1,6 @@
 ---
 import site from "../data/site.json";
+const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY || "0x4AAAAAAGRvXLKyAKNqo4sB";
 ---
 
 <footer>
@@ -37,8 +38,10 @@ import site from "../data/site.json";
           <label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off" /></label>
         </div>
         <p class="newsletter-note">By signing up, you agree to receive my newsletter. Unsubscribe anytime. <a href="/privacy">Privacy policy</a>.</p>
-        <button class="button" type="submit">Sign up <span aria-hidden="true">→</span></button>
-        <p class="newsletter-status" role="status" aria-live="polite" data-newsletter-status></p>
+        {turnstileSitekey && <div class="newsletter-bot-check" data-newsletter-turnstile data-sitekey={turnstileSitekey}></div>}
+        <button class="button" type="submit" disabled>Sign up <span aria-hidden="true">→</span></button>
+        <p class="newsletter-status" role="status" aria-live="polite" data-newsletter-status>{turnstileSitekey ? "Loading bot check…" : "Newsletter signup is temporarily unavailable. Please try again later."}</p>
+        <noscript><p>Please enable JavaScript to complete the bot check and sign up.</p></noscript>
       </form>
     </div>
   </div>
@@ -59,19 +62,91 @@ import site from "../data/site.json";
   </div>
 </footer>
 <script>
+  type TurnstileApi = {
+    render: (container: HTMLElement, options: {
+      sitekey: string;
+      action: string;
+      theme: string;
+      size: string;
+      callback: (token: string) => void;
+      "expired-callback": () => void;
+      "error-callback": () => void;
+    }) => string;
+    reset: (widgetId: string) => void;
+    remove: (widgetId: string) => void;
+  };
+  const turnstileWindow = window as Window & { turnstile?: TurnstileApi };
+  let turnstileLoad: Promise<TurnstileApi> | undefined;
+
+  function loadTurnstile() {
+    if (turnstileWindow.turnstile) return Promise.resolve(turnstileWindow.turnstile);
+    if (!turnstileLoad) {
+      turnstileLoad = new Promise<TurnstileApi>((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        script.async = true;
+        script.setAttribute("data-astro-persist", "newsletter-turnstile-script");
+        script.addEventListener("load", () => {
+          if (turnstileWindow.turnstile) resolve(turnstileWindow.turnstile);
+          else reject(new Error("Bot check unavailable"));
+        }, { once: true });
+        script.addEventListener("error", () => {
+          script.remove();
+          reject(new Error("Bot check unavailable"));
+        }, { once: true });
+        document.head.appendChild(script);
+      }).catch((error) => {
+        turnstileLoad = undefined;
+        throw error;
+      });
+    }
+    return turnstileLoad;
+  }
+
   function initNewsletterForm() {
     const form = document.querySelector<HTMLFormElement>("[data-newsletter-form]");
     const status = form?.querySelector<HTMLElement>("[data-newsletter-status]");
     const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const container = form?.querySelector<HTMLElement>("[data-newsletter-turnstile]");
     if (!form || !status || !button || form.dataset.bound === "true") return;
 
     form.dataset.bound = "true";
-    if (new URLSearchParams(window.location.search).get("newsletter") === "confirmed") {
-      status.textContent = "Thank you for confirming your subscription. You’re on the list!";
+    if (!container?.dataset.sitekey) {
+      form.addEventListener("submit", (event) => event.preventDefault());
+      return;
     }
+    let token = "";
+    let submitting = false;
+    let widgetId: string | undefined;
+    void loadTurnstile().then((api) => {
+      if (!form.isConnected) return;
+      status.textContent = "";
+      widgetId = api.render(container, {
+        sitekey: container.dataset.sitekey!, action: "signup", theme: "dark", size: "flexible",
+        callback: (value) => {
+          token = value;
+          button.disabled = submitting || !token;
+          if (status.textContent === "Bot check expired. Please complete it again.") status.textContent = "";
+        },
+        "expired-callback": () => {
+          token = "";
+          button.disabled = true;
+          if (!submitting) status.textContent = "Bot check expired. Please complete it again.";
+        },
+        "error-callback": () => {
+          token = "";
+          button.disabled = true;
+          if (!submitting) status.textContent = "The bot check couldn’t load. Please reload this page and try again.";
+        },
+      });
+      container.dataset.widgetId = widgetId;
+    }).catch(() => {
+      if (form.isConnected) status.textContent = "The bot check couldn’t load. Please reload this page and try again.";
+    });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (button.disabled) return;
+      if (submitting || !token) return;
+      submitting = true;
       const originalLabel = button.innerHTML;
       button.disabled = true;
       button.textContent = "Signing up…";
@@ -81,7 +156,7 @@ import site from "../data/site.json";
         const response = await fetch(form.action, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), "cf-turnstile-response": token }),
         });
         const result = await response.json();
         if (typeof result.message !== "string") throw new Error("Signup failed");
@@ -90,14 +165,21 @@ import site from "../data/site.json";
       } catch {
         status.textContent = "We couldn’t complete your signup. Please try again in a moment.";
       } finally {
-        button.disabled = false;
+        submitting = false;
+        token = "";
+        button.disabled = true;
         button.innerHTML = originalLabel;
+        if (form.isConnected && widgetId !== undefined) turnstileWindow.turnstile?.reset(widgetId);
       }
     });
   }
 
   initNewsletterForm();
   document.addEventListener("astro:page-load", initNewsletterForm);
+  document.addEventListener("astro:before-swap", () => {
+    const container = document.querySelector<HTMLElement>("[data-newsletter-turnstile]");
+    if (container?.dataset.widgetId !== undefined) turnstileWindow.turnstile?.remove(container.dataset.widgetId);
+  });
 </script>
 <style>
   .cta {
@@ -202,6 +284,9 @@ import site from "../data/site.json";
     cursor: pointer;
     font-family: inherit;
     font-size: 0.85rem;
+  }
+  .newsletter-bot-check {
+    margin-bottom: 1rem;
   }
   .newsletter button:disabled {
     cursor: wait;

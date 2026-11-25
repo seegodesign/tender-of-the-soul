@@ -1,4 +1,4 @@
-const SUCCESS = "Please check your inbox and click the confirmation link to finish signing up.";
+const SUCCESS = "Thank you for signing up for my newsletter!";
 
 async function providerFailure(response) {
   const details = { status: response.status, code: "unknown", reason: "unknown" };
@@ -22,7 +22,6 @@ async function providerFailure(response) {
       const reasons = [
         [/\bip\b|ip address/i, "ip_authorization"],
         [/scope|permission/i, "api_key_permissions"],
-        [/template|double.?opt|doi/i, "confirmation_template"],
         [/smtp|activat|validat.*account|account.*validat/i, "account_activation"],
         [/\blist\b|listIds/i, "subscriber_list"],
         [/api.?key|authentication/i, "api_key"],
@@ -91,13 +90,47 @@ export async function onRequest({ request, env }) {
     return reply("Please enter a valid email address.", 400);
   }
 
-  const templateId = Number(env.BREVO_DOI_TEMPLATE_ID);
-  if (!env.BREVO_API_KEY || !Number.isSafeInteger(templateId) || templateId <= 0) {
+  const expectedHostnames = new Set(
+    (env.TURNSTILE_HOSTNAMES ?? "")
+      .split(",")
+      .map((hostname) => hostname.trim())
+      .filter(Boolean),
+  );
+  const hostname = new URL(request.url).hostname;
+  if (!env.BREVO_API_KEY || !env.TURNSTILE_SECRET || !expectedHostnames.has(hostname)) {
     return reply("Newsletter signup is temporarily unavailable. Please try again later.", 503);
   }
 
+  const token = payload["cf-turnstile-response"];
+  if (typeof token !== "string" || !token.trim() || token.length > 2048) {
+    return reply("Please complete the bot check and try again.", 403);
+  }
+
   try {
-    const response = await fetch("https://api.brevo.com/v3/contacts/doubleOptinConfirmation", {
+    const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token }),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!verification.ok) {
+      await verification.body?.cancel();
+      throw new Error("Verification unavailable");
+    }
+    const result = await verification.json();
+    if (
+      result?.success !== true || result.action !== "signup" ||
+      result.hostname !== hostname || !expectedHostnames.has(result.hostname)
+    ) {
+      return reply("Please complete the bot check again and retry.", 403);
+    }
+  } catch {
+    console.error("Newsletter bot verification could not complete");
+    return reply("We couldn’t verify the bot check. Please try again later.", 503);
+  }
+
+  try {
+    const response = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": env.BREVO_API_KEY,
@@ -106,9 +139,8 @@ export async function onRequest({ request, env }) {
       },
       body: JSON.stringify({
         email,
-        includeListIds: [3],
-        templateId,
-        redirectionUrl: `${origin}/?newsletter=confirmed#newsletter-heading`,
+        listIds: [3],
+        updateEnabled: true,
       }),
       signal: AbortSignal.timeout(10000),
     });
@@ -116,15 +148,14 @@ export async function onRequest({ request, env }) {
     if (!response.ok) {
       console.error("Newsletter provider request failed", {
         ...await providerFailure(response),
-        templateId,
         listId: 3,
       });
-      return reply("We couldn’t send the confirmation email. Please try again later.", 502);
+      return reply("We couldn’t complete your signup. Please try again later.", 502);
     }
     await response.body?.cancel();
     return reply(SUCCESS);
   } catch {
     console.error("Newsletter provider request could not complete");
-    return reply("We couldn’t send the confirmation email. Please try again later.", 502);
+    return reply("We couldn’t complete your signup. Please try again later.", 502);
   }
 }
