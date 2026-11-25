@@ -307,20 +307,6 @@ collections:
               - { label: First paragraph, name: paragraphOne, widget: text }
               - { label: Second paragraph, name: paragraphTwo, widget: text }
               - { label: Closing statement, name: statement, widget: text }
-          - label: Related approaches
-            name: related
-            widget: object
-            fields:
-              - { label: Heading, name: heading, widget: string }
-              - { label: First paragraph, name: paragraphOne, widget: text }
-              - { label: Second paragraph, name: paragraphTwo, widget: text }
-          - label: Is Hakomi right for me?
-            name: fit
-            widget: object
-            fields:
-              - { label: Heading, name: heading, widget: string }
-              - { label: Body, name: body, widget: text }
-              - { label: Button label, name: buttonLabel, widget: string }
       - label: Sessions
         name: sessions
         file: src/data/sessions.json
