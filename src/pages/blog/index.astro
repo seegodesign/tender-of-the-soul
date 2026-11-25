@@ -18,7 +18,7 @@ import page from "../../data/journal.json";
     <div class="container posts">
       {
         posts.map((post, i) => (
-          <article class:list={{ featured: i === 0 }}>
+          <article>
             <a href={`/blog/${post.id}/`}>
               <>
                 <div class="visual">
@@ -42,7 +42,7 @@ import page from "../../data/journal.json";
                       })}
                     </p>
                     <h2>{post.data.title}</h2>
-                    <p>{post.data.excerpt}</p>
+                    <p class="excerpt">{post.data.excerpt}</p>
                     <span class="text-link">{page.readLabel} →</span>
                   </>
                 </div>
@@ -57,17 +57,14 @@ import page from "../../data/journal.json";
 <style>
   .posts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
   .posts article {
     border-top: 1px solid var(--line);
     padding-top: 1.5rem;
   }
-  .posts article.featured {
-    grid-column: 1/-1;
-  }
-  .posts article.featured a {
+  .posts article a {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -79,12 +76,9 @@ import page from "../../data/journal.json";
   .visual {
     position: relative;
     display: grid;
-    min-height: 260px;
+    min-height: 450px;
     place-items: center;
     overflow: hidden;
-  }
-  .featured .visual {
-    min-height: 450px;
   }
   .visual span {
     font: 4rem var(--serif);
@@ -108,17 +102,11 @@ import page from "../../data/journal.json";
     font-size: clamp(2rem, 4vw, 3.5rem);
     margin-bottom: 1rem;
   }
-  .posts article:not(.featured) h2 {
-    font-size: 2.2rem;
+  .excerpt {
+    white-space: pre-line;
   }
   @media (max-width: 700px) {
-    .posts {
-      grid-template-columns: 1fr;
-    }
-    .posts article.featured {
-      grid-column: auto;
-    }
-    .posts article.featured a {
+    .posts article a {
       grid-template-columns: 1fr;
       gap: 1rem;
     }

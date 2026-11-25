@@ -24,7 +24,7 @@ collections:
       - { label: Publish date, name: publishDate, widget: datetime, time_format: false }
       - { label: Updated date, name: updatedDate, widget: datetime, required: false, time_format: false }
       - { label: Author, name: author, widget: string, default: Elana }
-      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Excerpt, name: excerpt, widget: text, hint: "Press Enter for a line break. Blank lines add space between paragraphs on the journal list and post page." }
       - { label: Featured image, name: featuredImage, widget: image, required: false }
       - { label: Featured image alt text, name: featuredImageAlt, widget: string, required: false }
       - { label: Category, name: category, widget: string }
