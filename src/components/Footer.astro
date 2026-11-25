@@ -27,16 +27,19 @@ import site from "../data/site.json";
         >{site.navigation.contact}</a
       >
     </div>
-    <div class="legal">
-      <p>
-        <strong>{site.footer.importantLabel}</strong>&nbsp;
-        {site.footerDisclaimer}
-      </p>
-      <p>
-        <a href="/privacy">{site.footer.privacyLabel}</a> · <a
-          href="/disclaimer">{site.footer.disclaimerLabel}</a
-        >
-      </p>
+    <div class="newsletter">
+      <h2 id="newsletter-heading">Sign up for my newsletter</h2>
+      <p>Reflections and updates from Tender of the Soul, delivered to your inbox.</p>
+      <form action="/api/newsletter" method="POST" aria-labelledby="newsletter-heading" data-newsletter-form>
+        <label for="newsletter-email">Email address</label>
+        <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required maxlength="254" />
+        <div class="newsletter-trap" aria-hidden="true">
+          <label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <p class="newsletter-note">By signing up, you agree to receive my newsletter. Unsubscribe anytime. <a href="/privacy">Privacy policy</a>.</p>
+        <button class="button" type="submit">Sign up <span aria-hidden="true">→</span></button>
+        <p class="newsletter-status" role="status" aria-live="polite" data-newsletter-status></p>
+      </form>
     </div>
   </div>
   <div class="copyright container">
@@ -49,7 +52,53 @@ import site from "../data/site.json";
       ></span
     >
   </div>
+  <div class="legal container">
+    <a href="/privacy">{site.footer.privacyLabel}</a> · <a
+      href="/disclaimer">{site.footer.disclaimerLabel}</a
+    >
+  </div>
 </footer>
+<script>
+  function initNewsletterForm() {
+    const form = document.querySelector<HTMLFormElement>("[data-newsletter-form]");
+    const status = form?.querySelector<HTMLElement>("[data-newsletter-status]");
+    const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!form || !status || !button || form.dataset.bound === "true") return;
+
+    form.dataset.bound = "true";
+    if (new URLSearchParams(window.location.search).get("newsletter") === "confirmed") {
+      status.textContent = "Thank you for confirming your subscription. You’re on the list!";
+    }
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (button.disabled) return;
+      const originalLabel = button.innerHTML;
+      button.disabled = true;
+      button.textContent = "Signing up…";
+      status.textContent = "";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const result = await response.json();
+        if (typeof result.message !== "string") throw new Error("Signup failed");
+        status.textContent = result.message;
+        if (response.ok) form.reset();
+      } catch {
+        status.textContent = "We couldn’t complete your signup. Please try again in a moment.";
+      } finally {
+        button.disabled = false;
+        button.innerHTML = originalLabel;
+      }
+    });
+  }
+
+  initNewsletterForm();
+  document.addEventListener("astro:page-load", initNewsletterForm);
+</script>
 <style>
   .cta {
     position: relative;
@@ -87,8 +136,8 @@ import site from "../data/site.json";
   }
   .foot {
     display: grid;
-    grid-template-columns: 1fr 0.55fr 1.25fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 0.5fr 1.3fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
     padding-block: 5rem 3rem;
   }
   .wordmark {
@@ -114,9 +163,65 @@ import site from "../data/site.json";
     color: var(--cream);
     font-size: 0.82rem;
   }
-  .placeholder {
-    border-left: 2px solid var(--clay);
-    padding-left: 0.75rem;
+  .legal {
+    padding-bottom: 1.4rem;
+  }
+  .foot > div {
+    min-width: 0;
+  }
+  .newsletter h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    line-height: 1.15;
+  }
+  .newsletter label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
+  }
+  .newsletter input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem;
+    border: 1px solid var(--sage);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--purple-dark);
+    font: inherit;
+    font-size: 0.9rem;
+  }
+  .newsletter :is(input, button):focus-visible {
+    outline: 2px solid var(--cream);
+    outline-offset: 4px;
+  }
+  .newsletter .newsletter-note {
+    margin: 0.75rem 0 1rem;
+    font-size: 0.72rem;
+  }
+  .newsletter button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+  }
+  .newsletter button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+  .newsletter-trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .newsletter .newsletter-status {
+    margin: 0.75rem 0 0;
+    color: var(--cream);
+  }
+  @media (min-width: 801px) and (max-width: 1050px) {
+    .foot {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .copyright {
     display: flex;

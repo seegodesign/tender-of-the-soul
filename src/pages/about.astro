@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import { marked } from "marked";
 import about from "../data/about.json";
+
+const introductionHtml = marked.parse(about.introduction.body);
 ---
 
 <BaseLayout title={about.seo.title} description={about.seo.description}
@@ -32,11 +35,8 @@ import about from "../data/about.json";
       </div><div>
         <p class="eyebrow">{about.introduction.eyebrow}</p><h2>
           {about.introduction.heading}
-        </h2><p class="lead">{about.introduction.statement}</p><p>
-          {about.introduction.paragraphOne}
-        </p><p>{about.introduction.paragraphTwo}</p><p>
-          {about.introduction.paragraphThree}
-        </p>
+        </h2><p class="lead">{about.introduction.statement}</p>
+        <div class="prose" set:html={introductionHtml} />
       </div>
     </div>
   </section>

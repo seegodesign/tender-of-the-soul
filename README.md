@@ -1,5 +1,20 @@
 # Astro Starter Kit: Minimal
 
+## Newsletter signup on Cloudflare Pages
+
+The footer posts to `functions/api/newsletter.js`. This Pages Function uses Brevo's double opt-in API to add subscribers to **list 3 only after email confirmation**. The site still builds as static Astro; no Astro server adapter is required.
+
+In Cloudflare, select **Workers & Pages → tender-of-the-soul → Settings → Variables and Secrets** and add:
+
+- `BREVO_API_KEY`: a **secret**, containing your Brevo API key.
+- `BREVO_DOI_TEMPLATE_ID`: the numeric ID of an active Brevo double opt-in email template, with its confirmation link configured for the Brevo DOI API.
+
+Configure each deployment environment you use (Production for the main `tender-of-the-soul.pages.dev` URL; Preview for branch deployments). Redeploy after setting these values. Keep the existing build command `npm run build` and output directory `dist`. Cloudflare must deploy the root `functions/` directory along with the site through its Git integration or Wrangler; uploading only `dist` through the dashboard will not deploy the Function.
+
+In Brevo, look under **Marketing → Templates → Email** for the double opt-in confirmation template. Verify its sender and confirmation button before using its ID. See [Brevo's DOI API reference](https://developers.brevo.com/reference/create-doi-contact) and [Cloudflare Pages secrets](https://developers.cloudflare.com/pages/functions/bindings/#secrets).
+
+Missing configuration returns an unavailable message without subscribing anyone. Successful submissions prompt visitors to check their inbox; the confirmation email returns them to the current site's homepage with a thank-you message. Local `astro dev` serves the site only; testing the Function requires Cloudflare's Pages runtime. Run the mocked endpoint tests with `node --test tests/newsletter.test.mjs`; these never send real email.
+
 ```sh
 npm create astro@latest -- --template minimal
 ```

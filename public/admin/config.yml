@@ -182,9 +182,7 @@ collections:
               - { label: Kicker, name: eyebrow, widget: string }
               - { label: Heading, name: heading, widget: string }
               - { label: Practitioner statement, name: statement, widget: text }
-              - { label: First paragraph, name: paragraphOne, widget: text }
-              - { label: Second paragraph, name: paragraphTwo, widget: text }
-              - { label: Third paragraph, name: paragraphThree, widget: text }
+              - { label: Body, name: body, widget: markdown }
           - label: Orientation
             name: orientation
             widget: object
@@ -370,15 +368,6 @@ collections:
               - { label: Heading, name: heading, widget: string }
               - { label: First paragraph, name: paragraphOne, widget: text }
               - { label: Second paragraph, name: paragraphTwo, widget: text }
-          - label: First session
-            name: firstSession
-            widget: object
-            fields:
-              - { label: Kicker, name: eyebrow, widget: string }
-              - { label: Heading, name: heading, widget: string }
-              - { label: Lead statement, name: statement, widget: text }
-              - { label: Body, name: body, widget: text }
-              - { label: Button label, name: buttonLabel, widget: string }
       - label: Journal landing
         name: journal
         file: src/data/journal.json
