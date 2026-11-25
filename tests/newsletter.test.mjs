@@ -75,10 +75,37 @@ test("newsletter double opt-in endpoint", async (t) => {
     assert.equal(calls.length, 0);
   });
 
+  await t.test("provider diagnostics identify configuration problems without logging private details", async () => {
+    const log = t.mock.method(console, "error", () => {});
+    for (const [message, reason] of [
+      ["Template is not a valid DOI template", "confirmation_template"],
+      ["Template needs to be activated", "confirmation_template"],
+      ["Your SMTP account needs to be activated", "account_activation"],
+      ["Missing Transactional Email scope", "api_key_permissions"],
+      ["Unrecognised IP address", "ip_authorization"],
+      ["Invalid list", "subscriber_list"],
+      ["private-provider-details", "unknown"],
+    ]) {
+      globalThis.fetch.mock.mockImplementation(async () => Response.json({
+        code: "invalid_parameter", message: `${message}: reader@example.com test-key`,
+      }, { status: 400 }));
+      const response = await onRequest({ request: request({ email: "reader@example.com" }), env });
+      assert.equal(response.status, 502);
+      assert.deepEqual(log.mock.calls.at(-1).arguments, ["Newsletter provider request failed", {
+        status: 400, code: "invalid_parameter", reason, templateId: 12, listId: 3,
+      }]);
+      assert.doesNotMatch(await response.text(), /invalid_parameter|reader@example.com|test-key/);
+    }
+    log.mock.restore();
+  });
+
   await t.test("provider errors and network failures return a retry message without leaking details", async () => {
-    t.mock.method(console, "error", () => {});
+    const log = t.mock.method(console, "error", () => {});
     for (const implementation of [
       async () => new Response("private-provider-details", { status: 429 }),
+      async () => Response.json({ code: "test-key", message: "x".repeat(5000) }, { status: 400 }),
+      async () => Response.json(null, { status: 400 }),
+      async () => Response.json({ code: "test-key", message: "private-provider-details" }, { status: 400 }),
       async () => { throw new Error("private-provider-details"); },
     ]) {
       globalThis.fetch.mock.mockImplementation(implementation);
@@ -88,5 +115,6 @@ test("newsletter double opt-in endpoint", async (t) => {
       assert.match(text, /try again later/);
       assert.doesNotMatch(text, /private-provider-details|test-key|reader@example.com/);
     }
+    assert.doesNotMatch(JSON.stringify(log.mock.calls.map((call) => call.arguments)), /private-provider-details|test-key|reader@example.com/);
   });
 });

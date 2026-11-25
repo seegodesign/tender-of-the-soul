@@ -15,6 +15,8 @@ In Brevo, look under **Marketing → Templates → Email** for the double opt-in
 
 Missing configuration returns an unavailable message without subscribing anyone. Successful submissions prompt visitors to check their inbox; the confirmation email returns them to the current site's homepage with a thank-you message. Local `astro dev` serves the site only; testing the Function requires Cloudflare's Pages runtime. Run the mocked endpoint tests with `node --test tests/newsletter.test.mjs`; these never send real email.
 
+For signup failures, open the deployment's **View details → Functions** logs before retrying. A browser 502 can represent a rejection from Brevo; the server log records its status, recognized error code, configured template/list IDs, and a filtered `reason`, without raw provider messages or subscriber details. `confirmation_template` means check that the configured template is active and valid for DOI; `api_key_permissions` means check the key's Transactional Email scope; `account_activation` means check the account's transactional sending activation; `subscriber_list` means check list 3 exists; `ip_authorization` means review Brevo's authorized IP settings. These categories are hints inferred from Brevo's message. `unknown` means the message could not be classified. See [Brevo error responses](https://developers.brevo.com/docs/how-it-works) and [DOI permission requirements](https://status.brevo.com/incidents/01M5VB1KY7D7A9P0M82JR2AHVE).
+
 ```sh
 npm create astro@latest -- --template minimal
 ```

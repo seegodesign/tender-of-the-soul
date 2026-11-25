@@ -1,16 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHero from "../components/PageHero.astro";
 import contact from "../data/contact.json";
 ---
 
 <BaseLayout title={contact.seo.title} description={contact.seo.description}>
-  <PageHero
-    eyebrow={contact.hero.eyebrow}
-    title={contact.hero.title}
-    intro={contact.hero.introduction}
-  />
-  <section class="section">
+  <section class="section contact-section">
     <div class="container contact-grid">
       <div>
         <p class="eyebrow">{contact.introduction.eyebrow}</p>
@@ -121,6 +115,14 @@ import contact from "../data/contact.json";
   </section>
 </BaseLayout>
 <style>
+  .contact-section {
+    padding-top: calc(230px + 3rem);
+  }
+  @media (max-width: 1100px) {
+    .contact-section {
+      padding-top: calc(112px + 3rem);
+    }
+  }
   .contact-grid {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
