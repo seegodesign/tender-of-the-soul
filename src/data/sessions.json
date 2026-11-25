@@ -31,7 +31,10 @@
     "paragraphOne": "A session begins by contacting what feels alive in the present moment. Rather than imposing a predetermined agenda, Elana follows your unfolding process with you.",
     "paragraphTwo": "You might notice sensation, emotion, an image, a memory, a shift in breathing, a gesture, or words that seem to carry particular weight. There is no correct way to experience a session.",
     "steps": [
-      { "heading": "Arrive", "body": "We begin with what is here today." },
+      {
+        "heading": "Arrive",
+        "body": "We begin with what is here today."
+      },
       {
         "heading": "Notice",
         "body": "Attention gently turns toward present-moment experience."
@@ -41,8 +44,16 @@
         "body": "We stay curious about what unfolds, without forcing."
       },
       {
-        "heading": "Integrate",
-        "body": "We make space to orient and close with steadiness."
+        "heading": "Explore",
+        "body": "Together we explore what wants to be known through a particular gesture, posture, sensation. We might try little experiments to externalize an internal dynamic as we continue to follow the trail of breadcrumbs and little clues that might come in the form of images, memories or impulses.  We might choose to support a defensive response physically to see what happens when you don't have to hold it on your own anymore."
+      },
+      {
+        "heading": "Sense Making",
+        "body": "New points of view can arise from finally being able to see what was inside and in a tangle, on the outside and differentiated. We take the time to see how might life look from this new perspective, and what would be different as you go about your normal day and interactions?"
+      },
+      {
+        "heading": "Integration",
+        "body": "Wrapping it all up. What did you discover that was important or notable? How can we make room practically as well as internally for any new insights?"
       }
     ]
   },
@@ -52,5 +63,12 @@
     "heading": "You can pause at any time.",
     "paragraphOne": "We work collaboratively. You can ask questions, change direction, slow down, or stop. Protective responses are approached with respect, not treated as resistance.",
     "paragraphTwo": "No previous experience with mindfulness, somatic work, or therapy is needed."
+  },
+  "firstSession": {
+    "eyebrow": "Your first session",
+    "heading": "An invitation to experience yourself differently.",
+    "statement": "The first session offers a compassionate place to slow down, connect with what is alive inside, and begin noticing what may be asking to move, soften, or be met.",
+    "body": "There is no expectation of a dramatic breakthrough. We will also make room for questions, context, and a conversation about what support might feel useful.",
+    "buttonLabel": "Begin a Conversation"
   }
 }
