@@ -3,10 +3,9 @@ const path = Astro.url.pathname;
 import site from "../data/site.json";
 const links = [
   ["/about", site.navigation.about],
-  ["/hakomi", site.navigation.hakomi],
+  ["/hakomi", "What is Hakomi?"],
   ["/sessions", site.navigation.sessions],
   ["/blog", site.navigation.journal],
-  ["/contact", site.navigation.contact],
 ];
 ---
 
@@ -36,7 +35,7 @@ const links = [
           </a>
         ))
       }
-      <a class="button" href="/contact">{site.discoveryCallLabel}</a>
+      <a class="button" href="/contact">{site.navigation.contact}</a>
     </nav>
   </div>
 </header>
@@ -72,6 +71,7 @@ const links = [
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
   }
   .brand {
     display: inline-flex;
@@ -83,7 +83,7 @@ const links = [
   }
   .brand img {
     display: block;
-    width: 350px;
+    width: 420px;
     height: auto;
   }
   nav {
@@ -93,7 +93,7 @@ const links = [
   }
   nav > a:not(.button) {
     position: relative;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 500;
     text-decoration: none;
   }
@@ -109,6 +109,7 @@ const links = [
   nav .button {
     min-height: 44px;
     padding-inline: 1.15rem;
+    font-size: 1.2rem;
   }
   .menu-button {
     display: none;
@@ -123,12 +124,13 @@ const links = [
     margin: 6px;
     background: currentColor;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .inner {
-      min-height: 96px;
+      min-height: 112px;
+      gap: 1rem;
     }
     .brand img {
-      width: min(350px, calc(100vw - 120px));
+      width: min(420px, calc(100vw - 104px));
     }
     .menu-button {
       display: block;
@@ -153,7 +155,7 @@ const links = [
     }
     nav > a:not(.button) {
       font-family: var(--serif);
-      font-size: 2.2rem;
+      font-size: 2.5rem;
     }
   }
 </style>

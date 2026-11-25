@@ -45,26 +45,6 @@ const testimonials = (
     </div>
   </section>
 
-  <section class="section insight">
-    <div class="container grid-2">
-      <div class="arch" aria-hidden="true">
-        <div></div><span>{home.insight.diagramLabelOne}</span><span
-          >{home.insight.diagramLabelTwo}</span
-        >
-      </div>
-      <div>
-        <p class="eyebrow">{home.insight.eyebrow}</p><h2>
-          {home.insight.heading}
-        </h2><p class="lead">{home.insight.lead}</p><p>
-          {home.insight.paragraphOne}
-        </p><p>{home.insight.paragraphTwo}</p><a
-          class="text-link"
-          href="/hakomi">{home.insight.linkLabel} <span>→</span></a
-        >
-      </div>
-    </div>
-  </section>
-
   <section class="section approach">
     <div class="container">
       <div class="approach-head">
@@ -73,7 +53,8 @@ const testimonials = (
             {home.approach.heading}
           </h2>
         </div><p>{home.approach.introduction}</p>
-      </div><Principles items={home.approach.principles} />
+      </div>
+      <Principles items={home.approach.principles} />
     </div>
   </section>
 
@@ -208,54 +189,6 @@ const testimonials = (
   .welcome h2 {
     max-width: 580px;
   }
-  .insight {
-    background: var(--cream);
-  }
-  .arch {
-    position: relative;
-    min-height: 560px;
-    border: 1px solid var(--line);
-    background:
-      radial-gradient(
-        circle at 50% 80%,
-        rgba(200, 117, 93, 0.35),
-        transparent 32%
-      ),
-      linear-gradient(155deg, var(--mist), #d0d7c6);
-    overflow: hidden;
-  }
-  .arch div {
-    position: absolute;
-    width: 75%;
-    height: 80%;
-    left: 12.5%;
-    bottom: -20%;
-    border: 1px solid rgba(32, 53, 47, 0.35);
-    border-radius: 50% 50% 0 0;
-  }
-  .arch div::before,
-  .arch div::after {
-    content: "";
-    position: absolute;
-    inset: 12%;
-    border: 1px solid rgba(32, 53, 47, 0.25);
-    border-radius: 50% 50% 0 0;
-  }
-  .arch div::after {
-    inset: 25%;
-  }
-  .arch span {
-    position: absolute;
-    font: 1.3rem var(--serif);
-  }
-  .arch span:nth-of-type(1) {
-    top: 12%;
-    left: 10%;
-  }
-  .arch span:nth-of-type(2) {
-    bottom: 9%;
-    right: 8%;
-  }
   .approach-head {
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
@@ -381,10 +314,6 @@ const testimonials = (
     }
     .possibility-grid {
       grid-template-columns: 1fr 1fr;
-    }
-    .arch {
-      min-height: 380px;
-      order: 2;
     }
   }
 </style>

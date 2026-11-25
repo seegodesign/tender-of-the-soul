@@ -3,7 +3,7 @@ import site from "../data/site.json";
 ---
 
 <footer>
-  <section class="cta">
+  {Astro.url.pathname === "/" && <section class="cta">
     <div class="container">
       <p class="eyebrow">{site.footer.ctaEyebrow}</p>
       <h2>{site.footer.ctaHeading}</h2>
@@ -12,7 +12,7 @@ import site from "../data/site.json";
         >{site.footer.ctaButton} <span aria-hidden="true">→</span></a
       >
     </div>
-  </section>
+  </section>}
   <div class="foot container">
     <div>
       <a class="wordmark" href="/">{site.practiceName}</a>

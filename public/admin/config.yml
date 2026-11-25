@@ -95,18 +95,6 @@ collections:
               - { label: Core statement, name: statement, widget: text }
               - { label: Body, name: body, widget: text }
               - { label: Link label, name: linkLabel, widget: string }
-          - label: Beyond understanding
-            name: insight
-            widget: object
-            fields:
-              - { label: Kicker, name: eyebrow, widget: string }
-              - { label: Heading, name: heading, widget: string }
-              - { label: Lead, name: lead, widget: text }
-              - { label: First paragraph, name: paragraphOne, widget: text }
-              - { label: Second paragraph, name: paragraphTwo, widget: text }
-              - { label: Link label, name: linkLabel, widget: string }
-              - { label: Diagram first label, name: diagramLabelOne, widget: string }
-              - { label: Diagram second label, name: diagramLabelTwo, widget: string }
           - label: Approach
             name: approach
             widget: object
