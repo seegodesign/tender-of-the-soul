@@ -21,16 +21,23 @@ function setup({ apiLoaded = true } = {}) {
     const status = { textContent: "Loading bot check…" };
     const button = { disabled: true, innerHTML: "Sign up", textContent: "Sign up" };
     const container = { dataset: { sitekey: "public-sitekey" } };
+    const names = { hidden: true, disabled: true };
+    const firstName = { value: "", focused: false, focus() { this.focused = true; } };
+    const lastName = { value: "", focused: false, focus() { this.focused = true; } };
     return {
-      status, button, container, dataset: {}, isConnected: true, events: {}, resets: 0,
+      status, button, container, names, firstName, lastName, dataset: {}, isConnected: true, events: {}, resets: 0,
       action: "/api/newsletter",
       querySelector(selector) {
         if (selector.includes("status")) return status;
         if (selector.includes("turnstile")) return container;
+        if (selector.includes("newsletter-names")) return names;
+        if (selector.includes("firstName")) return firstName;
+        if (selector.includes("lastName")) return lastName;
         return button;
       },
       addEventListener(event, callback) { this.events[event] = callback; },
-      reset() { this.resets++; },
+      reportValidity() { return names.disabled || Boolean(firstName.value && lastName.value); },
+      reset() { this.resets++; firstName.value = ""; lastName.value = ""; },
     };
   }
   let form = newForm();
@@ -50,7 +57,16 @@ function setup({ apiLoaded = true } = {}) {
   };
   vm.runInNewContext(code, {
     window, document,
-    FormData: class { *[Symbol.iterator]() { yield ["email", "reader@example.com"]; yield ["website", ""]; } },
+    FormData: class {
+      *[Symbol.iterator]() {
+        yield ["email", "reader@example.com"];
+        yield ["website", ""];
+        if (!form.names.disabled) {
+          yield ["firstName", form.firstName.value];
+          yield ["lastName", form.lastName.value];
+        }
+      }
+    },
     fetch: async (url, options) => { requests.push([url, options]); return respond(); },
   });
   return {
@@ -79,9 +95,23 @@ test("signup requires a token and refreshes after success, provider rejection an
     page.setResponse(response);
     page.widgets[0].options.callback("fresh-token");
     assert.equal(page.form.button.disabled, false);
+    if (page.form.names.hidden) await page.submit();
+    page.form.firstName.value = "Renée";
+    page.form.lastName.value = "O’Connor-Smith";
     await page.submit();
     assert.equal(page.form.button.disabled, true);
     assert.equal(JSON.parse(page.requests.at(-1)[1].body)["cf-turnstile-response"], "fresh-token");
+    assert.equal(JSON.parse(page.requests.at(-1)[1].body).firstName, "Renée");
+    assert.equal(JSON.parse(page.requests.at(-1)[1].body).lastName, "O’Connor-Smith");
+    if (page.form.resets === 1 && page.requests.length === 1) {
+      assert.equal(page.form.names.hidden, true);
+      assert.equal(page.form.names.disabled, true);
+      assert.equal(page.form.firstName.value, "");
+    } else {
+      assert.equal(page.form.names.hidden, false);
+      assert.equal(page.form.firstName.value, "Renée");
+      assert.equal(page.form.lastName.value, "O’Connor-Smith");
+    }
   }
   assert.equal(page.form.resets, 1);
   assert.deepEqual(page.resets, ["1", "1", "1"]);
@@ -101,7 +131,40 @@ test("expired tokens disable signup and navigation removes and recreates the wid
   assert.equal(page.widgets.length, 2);
   page.widgets[1].options.callback("new-page-token");
   await page.submit();
+  page.form.firstName.value = "Reader";
+  page.form.lastName.value = "Example";
+  await page.submit();
   assert.deepEqual(page.resets, ["2"]);
+});
+
+test("email step reveals names without subscribing, and incomplete names cannot submit", async () => {
+  const page = setup();
+  await settle();
+  assert.equal(page.form.names.hidden, true);
+  assert.equal(page.form.names.disabled, true);
+  page.widgets[0].options.callback("fresh-token");
+  await page.submit();
+  assert.equal(page.requests.length, 0);
+  assert.equal(page.form.names.hidden, false);
+  assert.equal(page.form.names.disabled, false);
+  assert.equal(page.form.firstName.focused, true);
+  assert.equal(page.form.button.textContent, "Complete signup");
+  await page.submit();
+  page.form.firstName.value = "Reader";
+  await page.submit();
+  page.form.lastName.value = "   ";
+  await page.submit();
+  assert.equal(page.requests.length, 0);
+  assert.equal(page.form.lastName.focused, true);
+  page.form.lastName.value = "Example";
+  page.widgets[0].options["expired-callback"]();
+  await page.submit();
+  assert.equal(page.requests.length, 0);
+  assert.equal(page.form.names.hidden, false);
+  page.widgets[0].options.callback("refreshed-token");
+  await page.submit();
+  assert.equal(page.requests.length, 1);
+  assert.equal(JSON.parse(page.requests[0][1].body)["cf-turnstile-response"], "refreshed-token");
 });
 
 test("a blocked challenge script leaves signup disabled with a recovery message", async () => {

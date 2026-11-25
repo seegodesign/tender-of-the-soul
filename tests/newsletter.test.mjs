@@ -14,7 +14,7 @@ function request(payload, options = {}) {
     method: "POST",
     headers: { Origin: origin, "Content-Type": "application/json" },
     body: JSON.stringify(payload && !Array.isArray(payload)
-      ? { "cf-turnstile-response": "test-token", ...payload }
+      ? { "cf-turnstile-response": "test-token", firstName: "Renée", lastName: "O’Connor-Smith", ...payload }
       : payload),
     ...options,
   });
@@ -53,6 +53,7 @@ test("newsletter signup with server-side bot protection", async (t) => {
     assert.equal(options.headers["api-key"], "test-key");
     assert.deepEqual(JSON.parse(options.body), {
       email: "reader@example.com", listIds: [3], updateEnabled: true,
+      attributes: { FIRSTNAME: "Renée", LASTNAME: "O’Connor-Smith" },
     });
     calls = [];
     verifications = [];
@@ -64,7 +65,29 @@ test("newsletter signup with server-side bot protection", async (t) => {
     assert.equal(response.status, 200);
     assert.deepEqual(JSON.parse(calls[0][1].body), {
       email: "existing@example.com", listIds: [3], updateEnabled: true,
+      attributes: { FIRSTNAME: "Renée", LASTNAME: "O’Connor-Smith" },
     });
+    calls = [];
+    verifications = [];
+  });
+
+  await t.test("names are required and validated before contacting either service", async () => {
+    for (const field of ["firstName", "lastName"]) {
+      for (const value of [undefined, null, 42, {}, "", "   ", "x".repeat(101), "Name\u0000text", "Name\ntext"]) {
+        const response = await onRequest({ request: request({ email: "reader@example.com", [field]: value }), env });
+        assert.equal(response.status, 400);
+      }
+    }
+    assert.equal(calls.length, 0);
+    assert.equal(verifications.length, 0);
+  });
+
+  await t.test("names are trimmed and support international text and punctuation", async () => {
+    const response = await onRequest({ request: request({
+      email: "reader@example.com", firstName: "  李  ", lastName: "  O’Connor-Smith  ",
+    }), env });
+    assert.equal(response.status, 200);
+    assert.deepEqual(JSON.parse(calls[0][1].body).attributes, { FIRSTNAME: "李", LASTNAME: "O’Connor-Smith" });
     calls = [];
     verifications = [];
   });

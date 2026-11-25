@@ -36,6 +36,13 @@ const turnstileSitekey = import.meta.env.DEV
       <form action="/api/newsletter" method="POST" aria-labelledby="newsletter-heading" data-newsletter-form>
         <label for="newsletter-email">Email address</label>
         <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required maxlength="254" />
+        <fieldset class="newsletter-names" data-newsletter-names hidden disabled>
+          <legend>One more step: what’s your name?</legend>
+          <label for="newsletter-first-name">First name</label>
+          <input id="newsletter-first-name" name="firstName" autocomplete="given-name" required maxlength="100" />
+          <label for="newsletter-last-name">Last name</label>
+          <input id="newsletter-last-name" name="lastName" autocomplete="family-name" required maxlength="100" />
+        </fieldset>
         <div class="newsletter-trap" aria-hidden="true">
           <label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off" /></label>
         </div>
@@ -111,9 +118,13 @@ const turnstileSitekey = import.meta.env.DEV
     const status = form?.querySelector<HTMLElement>("[data-newsletter-status]");
     const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
     const container = form?.querySelector<HTMLElement>("[data-newsletter-turnstile]");
-    if (!form || !status || !button || form.dataset.bound === "true") return;
+    const names = form?.querySelector<HTMLFieldSetElement>("[data-newsletter-names]");
+    const firstName = form?.querySelector<HTMLInputElement>('[name="firstName"]');
+    const lastName = form?.querySelector<HTMLInputElement>('[name="lastName"]');
+    if (!form || !status || !button || !names || !firstName || !lastName || form.dataset.bound === "true") return;
 
     form.dataset.bound = "true";
+    const signupLabel = button.innerHTML;
     if (!container?.dataset.sitekey) {
       form.addEventListener("submit", (event) => event.preventDefault());
       return;
@@ -150,8 +161,23 @@ const turnstileSitekey = import.meta.env.DEV
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (submitting || !token) return;
+      if (!form.reportValidity()) return;
+      if (names.hidden) {
+        names.hidden = false;
+        names.disabled = false;
+        button.textContent = "Complete signup";
+        status.textContent = "Please enter your first and last name to finish signing up.";
+        firstName.focus();
+        return;
+      }
+      for (const input of [firstName, lastName]) {
+        if (!input.value.trim()) {
+          status.textContent = "Please enter your first and last name to finish signing up.";
+          input.focus();
+          return;
+        }
+      }
       submitting = true;
-      const originalLabel = button.innerHTML;
       button.disabled = true;
       button.textContent = "Signing up…";
       status.textContent = "";
@@ -165,14 +191,18 @@ const turnstileSitekey = import.meta.env.DEV
         const result = await response.json();
         if (typeof result.message !== "string") throw new Error("Signup failed");
         status.textContent = result.message;
-        if (response.ok) form.reset();
+        if (response.ok) {
+          form.reset();
+          names.hidden = true;
+          names.disabled = true;
+        }
       } catch {
         status.textContent = "We couldn’t complete your signup. Please try again in a moment.";
       } finally {
         submitting = false;
         token = "";
         button.disabled = true;
-        button.innerHTML = originalLabel;
+        button.innerHTML = names.hidden ? signupLabel : "Complete signup";
         if (form.isConnected && widgetId !== undefined) turnstileWindow.turnstile?.reset(widgetId);
       }
     });
@@ -279,6 +309,19 @@ const turnstileSitekey = import.meta.env.DEV
   .newsletter :is(input, button):focus-visible {
     outline: 2px solid var(--cream);
     outline-offset: 4px;
+  }
+  .newsletter-names {
+    margin: 1rem 0 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .newsletter-names legend {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .newsletter-names input + label {
+    margin-top: 0.75rem;
   }
   .newsletter .newsletter-note {
     margin: 0.75rem 0 1rem;

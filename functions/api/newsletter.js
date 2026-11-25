@@ -89,6 +89,11 @@ export async function onRequest({ request, env }) {
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return reply("Please enter a valid email address.", 400);
   }
+  const firstName = typeof payload.firstName === "string" ? payload.firstName.trim() : "";
+  const lastName = typeof payload.lastName === "string" ? payload.lastName.trim() : "";
+  if (!firstName || !lastName || firstName.length > 100 || lastName.length > 100 || /[\u0000-\u001f\u007f]/.test(firstName + lastName)) {
+    return reply("Please enter your first and last name (up to 100 characters each).", 400);
+  }
 
   const expectedHostnames = new Set(
     (env.TURNSTILE_HOSTNAMES ?? "")
@@ -139,6 +144,7 @@ export async function onRequest({ request, env }) {
       },
       body: JSON.stringify({
         email,
+        attributes: { FIRSTNAME: firstName, LASTNAME: lastName },
         listIds: [3],
         updateEnabled: true,
       }),

@@ -4,6 +4,8 @@
 
 The footer posts to `functions/api/newsletter.js`. This Pages Function uses Brevo's contacts API to add subscribers directly to **list 3**, without a confirmation email. Existing contacts are updated to include list 3; the request does not change email blocklist settings. The site still builds as static Astro; no Astro server adapter is required.
 
+Newsletter signup has two steps: enter an email address and select **Sign up**, then enter first and last name and select **Complete signup**. The first step makes no signup request and does not create a Brevo contact. Both names are required (up to 100 characters each); the final request sends the email and names together, mapping names to Brevo’s `FIRSTNAME` and `LASTNAME` text attributes. Ensure those attributes exist in the Brevo account. Errors retain the entered details for retry; success clears the form and returns to the email step.
+
 In Cloudflare, select **Workers & Pages → tender-of-the-soul → Settings → Variables and Secrets** and add `BREVO_API_KEY` as a **secret**, containing your Brevo API key with permission to create and update contacts. No email template is required; `BREVO_DOI_TEMPLATE_ID` is no longer used and can be removed.
 
 Signup also requires Cloudflare Turnstile. In **Cloudflare → Turnstile**, create a **Managed** widget for `tender-of-the-soul.pages.dev`, `tenderofthesoul.com`, and `www.tenderofthesoul.com` (include only the domains you use). Add these settings to the Pages project's Production environment:
